@@ -1,605 +1,993 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Jaspreet Singh Portfolio</title>
-<meta name="claude:viewport-fit-sides" content="cover">
-<meta name="description" content="Jaspreet Singh, Senior Frontend Team Lead. Angular and TypeScript engineer building HIPAA-compliant claims, telehealth and offline-first field apps. Remote from India.">
+<meta name="description" content="Jaspreet Singh, Senior Frontend Team Lead. Angular for revenue cycle management (RCM), remote patient monitoring (RPM), MediaPipe Holistic tracking and offline-first field apps. Remote from India.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Source+Sans+3:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Source+Sans+3:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap">
 <style>
-/* Layout concept: a clinical chart. One long page, wide left rail of labels, content right.
-   Hero carries a live-style joint-angle figure (the MediaPipe telehealth work). */
-:root {
-  --bg: #F4F8F8;
-  --surface: #FFFFFF;
-  --ink: #0B1F2A;
-  --ink-soft: #4B5F6B;
-  --line: #D4E0E2;
-  --teal: #0B7A87;
-  --teal-ink: #064E57;
-  --signal: #D9480F;
-  --wash: #E3F0F1;
-  --display: 'Bricolage Grotesque', 'Segoe UI', system-ui, sans-serif;
-  --body: 'Source Sans 3', 'Segoe UI', system-ui, sans-serif;
-  --mono: 'JetBrains Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
-}
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --bg: #09161D;
-    --surface: #102530;
-    --ink: #E6F0F2;
-    --ink-soft: #9FB4BC;
-    --line: #1F3A47;
-    --teal: #4CC3D1;
-    --teal-ink: #8EDDE6;
-    --signal: #FF8A5B;
-    --wash: #0F2B35;
-    color-scheme: dark;
-  }
-}
-:root[data-theme="dark"] {
-  --bg: #09161D;
-  --surface: #102530;
-  --ink: #E6F0F2;
-  --ink-soft: #9FB4BC;
-  --line: #1F3A47;
-  --teal: #4CC3D1;
-  --teal-ink: #8EDDE6;
-  --signal: #FF8A5B;
-  --wash: #0F2B35;
-  color-scheme: dark;
-}
+/* Layout: a clinical chart. Left rail of labels, content right. Each showcase is a live canvas scene. */
+:root{color-scheme:light;--bg:#F4F8F8;--surface:#FFFFFF;--ink:#0B1F2A;--ink-soft:#4B5F6B;--line:#D4E0E2;--teal:#0B7A87;--teal-ink:#064E57;--signal:#D9480F;--wash:#E3F0F1;--on-teal:#FFFFFF;--display:'Bricolage Grotesque','Segoe UI',system-ui,sans-serif;--body:'Source Sans 3','Segoe UI',system-ui,sans-serif;--mono:'JetBrains Mono',ui-monospace,'SFMono-Regular',Menlo,monospace;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#09161D;--surface:#102530;--ink:#E6F0F2;--ink-soft:#9FB4BC;--line:#1F3A47;--teal:#4CC3D1;--teal-ink:#8EDDE6;--signal:#FF8A5B;--wash:#0F2B35;--on-teal:#06222A;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#09161D;--surface:#102530;--ink:#E6F0F2;--ink-soft:#9FB4BC;--line:#1F3A47;--teal:#4CC3D1;--teal-ink:#8EDDE6;--signal:#FF8A5B;--wash:#0F2B35;--on-teal:#06222A;color-scheme:dark}
 
-* { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
-body {
-  background: var(--bg);
-  color: var(--ink);
-  font-family: var(--body);
-  font-size: 18px;
-  line-height: 1.6;
-  padding-block: 0 56px;
-  padding-left: max(16px, env(safe-area-inset-left, 0px));
-  padding-right: max(16px, env(safe-area-inset-right, 0px));
-  -webkit-font-smoothing: antialiased;
-}
-a { color: var(--teal-ink); text-underline-offset: 3px; }
-a:hover { color: var(--signal); }
-a:focus-visible, button:focus-visible { outline: 3px solid var(--signal); outline-offset: 3px; border-radius: 4px; }
-.shell { max-width: 1060px; margin: 0 auto; }
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:16px}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:18px;line-height:1.6;padding:0 max(16px,env(safe-area-inset-left,0px)) 56px;-webkit-font-smoothing:antialiased}
+.shell{max-width:1060px;margin:0 auto}
+a{color:var(--teal-ink);text-underline-offset:3px}
+a:hover{color:var(--signal)}
+:focus-visible{outline:3px solid var(--signal);outline-offset:3px;border-radius:4px}
+p{margin:0}
 
-/* nav */
-.nav { display: flex; flex-wrap: wrap; gap: 12px 28px; align-items: center; justify-content: space-between; padding-block: 22px; border-bottom: 1px solid var(--line); }
-.nav .brand { font-family: var(--display); font-weight: 700; font-size: 1.05rem; letter-spacing: .01em; color: var(--ink); text-decoration: none; }
-.nav ul { display: flex; flex-wrap: wrap; gap: 6px 22px; list-style: none; margin: 0; padding: 0; font-family: var(--mono); font-size: .8rem; text-transform: uppercase; letter-spacing: .08em; }
-.nav ul a { color: var(--ink-soft); text-decoration: none; }
-.nav ul a:hover { color: var(--signal); }
+.nav{display:flex;flex-wrap:wrap;gap:12px 28px;align-items:center;justify-content:space-between;padding-block:22px;border-bottom:1px solid var(--line)}
+.nav .brand{font-family:var(--display);font-weight:700;font-size:1.05rem;color:var(--ink);text-decoration:none}
+.nav ul{display:flex;flex-wrap:wrap;gap:6px 22px;list-style:none;margin:0;padding:0;font-family:var(--mono);font-size:.78rem;text-transform:uppercase;letter-spacing:.08em}
+.nav ul a{color:var(--ink-soft);text-decoration:none}
+.nav ul a:hover{color:var(--signal)}
 
-/* hero */
-.hero { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, .75fr); gap: 40px 56px; align-items: center; padding-block: 64px 48px; }
-.eyebrow { font-family: var(--mono); font-size: .8rem; letter-spacing: .1em; text-transform: uppercase; color: var(--teal-ink); margin: 0 0 18px; }
-h1 { font-family: var(--display); font-weight: 800; font-size: clamp(2.2rem, 5.6vw, 3.9rem); line-height: 1.04; letter-spacing: -.02em; margin: 0 0 22px; text-wrap: balance; }
-h1 em { font-style: normal; color: var(--teal); }
-.lede { max-width: 56ch; font-size: 1.15rem; color: var(--ink-soft); margin: 0 0 30px; }
-.cta { display: flex; flex-wrap: wrap; gap: 12px 14px; }
-.btn { display: inline-block; font-family: var(--display); font-weight: 700; font-size: .98rem; padding: 13px 22px; border-radius: 8px; text-decoration: none; border: 2px solid var(--teal); }
-.btn.primary { background: var(--teal); color: #FFFFFF; }
-:root[data-theme="dark"] .btn.primary { color: #06222A; }
-@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .btn.primary { color: #06222A; } }
-.btn.primary:hover { background: var(--signal); border-color: var(--signal); color: #fff; }
-.btn.ghost { color: var(--teal-ink); background: transparent; }
-.btn.ghost:hover { border-color: var(--signal); color: var(--signal); }
+.hero{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,.7fr);gap:40px 56px;align-items:center;padding-block:60px 44px}
+.eyebrow{font-family:var(--mono);font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;color:var(--teal-ink);margin-bottom:18px}
+h1{font-family:var(--display);font-weight:800;font-size:clamp(2.2rem,5.6vw,3.9rem);line-height:1.04;letter-spacing:-.02em;margin:0 0 22px;text-wrap:balance}
+h1 em{font-style:normal;color:var(--teal)}
+#rot{display:inline-block}
+.lede{max-width:56ch;font-size:1.15rem;color:var(--ink-soft);margin-bottom:28px}
+.cta{display:flex;flex-wrap:wrap;gap:12px 14px}
+.btn{display:inline-block;font-family:var(--display);font-weight:700;font-size:.98rem;padding:13px 22px;border-radius:8px;text-decoration:none;border:2px solid var(--teal)}
+.btn.primary{background:var(--teal);color:var(--on-teal)}
+.btn.primary:hover{background:var(--signal);border-color:var(--signal);color:#fff}
+.btn.ghost{color:var(--teal-ink);background:transparent}
+.btn.ghost:hover{border-color:var(--signal);color:var(--signal)}
+.avail{display:flex;align-items:center;gap:9px;flex-wrap:wrap;margin-top:20px;font-family:var(--mono);font-size:.76rem;letter-spacing:.04em;color:var(--ink-soft)}
+.avail-dot{width:8px;height:8px;border-radius:50%;background:var(--signal);flex:none}
 
-.avail { display: flex; align-items: center; gap: 9px; flex-wrap: wrap; margin: 20px 0 0; font-family: var(--mono); font-size: .76rem; letter-spacing: .04em; color: var(--ink-soft); }
-.avail-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--signal); flex: none; }
-@media (prefers-reduced-motion: no-preference) { .avail-dot { animation: blink 1.9s ease-in-out infinite; } }
+.index{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:8px 0}
+.index a{display:grid;grid-template-columns:44px minmax(0,1fr);gap:4px 12px;padding:14px 20px;text-decoration:none;color:var(--ink);border-bottom:1px solid var(--line)}
+.index a:last-child{border-bottom:0}
+.index a:hover{background:var(--wash)}
+.index .n{font-family:var(--mono);font-size:.78rem;color:var(--signal);padding-top:4px}
+.index b{font-family:var(--display);font-weight:700;font-size:1.05rem}
+.index span:not(.n){grid-column:2;font-size:.92rem;color:var(--ink-soft)}
+.index .n{grid-column:1;grid-row:1 / span 2}
+.index b{grid-column:2}
 
-.figure { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 18px 18px 14px; }
-.figure svg { display: block; width: 100%; height: auto; }
-.figure figcaption { font-family: var(--mono); font-size: .72rem; letter-spacing: .06em; color: var(--ink-soft); margin-top: 8px; }
-.fig-line { stroke: var(--ink-soft); stroke-width: 3; stroke-linecap: round; fill: none; }
-.fig-guide { stroke: var(--line); stroke-width: 1.5; stroke-dasharray: 5 5; fill: none; }
-.fig-arc { stroke: var(--signal); stroke-width: 3; fill: none; }
-.fig-dot { fill: var(--surface); stroke: var(--teal); stroke-width: 3; }
-.fig-dot.hot { stroke: var(--signal); }
-.fig-label { font-family: var(--mono); font-size: 11px; fill: var(--ink-soft); letter-spacing: .06em; }
-.fig-angle { font-family: var(--display); font-weight: 800; font-size: 26px; fill: var(--signal); }
-.live-dot { display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: var(--signal); margin-right: 7px; vertical-align: middle; }
+.facts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-block:1px solid var(--line)}
+.fact{padding:22px 20px 22px 0}
+.fact+.fact{padding-left:20px;border-left:1px solid var(--line)}
+.fact b{display:block;font-family:var(--display);font-weight:800;font-size:clamp(1.7rem,3.4vw,2.3rem);line-height:1.05;font-variant-numeric:tabular-nums}
+.fact span{display:block;font-size:.95rem;color:var(--ink-soft);margin-top:6px}
 
-/* hero: camera -> pose tracking -> clinician panel */
-.cam-body { fill: var(--surface); stroke: var(--ink-soft); stroke-width: 2; }
-.cam-lens { fill: var(--surface); stroke: var(--ink-soft); stroke-width: 2; }
-.cam-dot { fill: var(--signal); }
-.feed-wire { stroke: var(--line); stroke-width: 1.5; stroke-dasharray: 4 5; fill: none; }
-.clinician-panel { fill: var(--wash); stroke: var(--line); stroke-width: 1.5; }
-.clinician-label { font-family: var(--mono); font-size: 10px; fill: var(--ink-soft); letter-spacing: .07em; }
+section.block{display:grid;grid-template-columns:190px minmax(0,1fr);gap:16px 48px;padding-block:64px 0}
+.rail{font-family:var(--mono);font-size:.78rem;text-transform:uppercase;letter-spacing:.1em;color:var(--teal-ink);padding-top:10px}
+h2{font-family:var(--display);font-weight:800;font-size:clamp(1.6rem,3vw,2.2rem);line-height:1.1;letter-spacing:-.01em;margin:0 0 26px;text-wrap:balance}
+h3{font-family:var(--display);font-weight:700;font-size:1.3rem;line-height:1.2;margin:0 0 6px}
 
-/* claims pipeline demo */
-.pipeline-figure { margin-top: 18px; }
-.pipeline-svg { width: 100%; height: auto; display: block; }
-.pipe-track { stroke: var(--line); stroke-width: 2; }
-.pipe-node { fill: var(--surface); stroke: var(--line); stroke-width: 2; }
-.pipe-dot { fill: var(--signal); }
-.pipe-label { font-family: var(--mono); font-size: 10px; fill: var(--ink-soft); letter-spacing: .05em; }
-.stage-label { font-family: var(--mono); font-size: 11px; fill: var(--signal); letter-spacing: .06em; font-weight: 500; }
-.stage-label.s2, .stage-label.s3 { opacity: 0; }
-.lock-body { fill: var(--surface); stroke: var(--signal); stroke-width: 1.6; }
-.lock-shackle { fill: none; stroke: var(--signal); stroke-width: 1.6; }
-.hipaa-label { font-family: var(--mono); font-size: 9px; fill: var(--ink-soft); letter-spacing: .06em; }
+.case{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:26px 26px 22px;min-width:0}
+.case .tag{font-family:var(--mono);font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;color:var(--signal);margin-bottom:8px}
+.case .sub{color:var(--ink-soft);margin-bottom:18px;max-width:66ch}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0 0;padding:0;list-style:none}
+.chips li{font-family:var(--mono);font-size:.76rem;background:var(--wash);color:var(--teal-ink);padding:4px 10px;border-radius:999px}
+.note{font-family:var(--mono);font-size:.72rem;letter-spacing:.04em;color:var(--ink-soft);margin-top:12px}
 
-/* offline sync / IoT demo */
-.sync-figure { margin-top: 18px; }
-.sync-svg { width: 100%; height: auto; display: block; }
-.dev-body { fill: var(--surface); stroke: var(--line); stroke-width: 2; }
-.dev-screen { fill: var(--wash); stroke: var(--line); stroke-width: 1.5; }
-.queue-bar { fill: var(--teal); }
-.wifi-arc, .wifi-dot { fill: none; stroke: var(--ink-soft); stroke-width: 3; stroke-linecap: round; }
-.wifi-dot { fill: var(--ink-soft); stroke: none; }
-.wifi-slash { stroke: var(--ink-soft); stroke-width: 3; stroke-linecap: round; }
-.status-label { font-family: var(--mono); font-size: 10px; letter-spacing: .06em; fill: var(--ink-soft); text-anchor: middle; }
-.label-on { opacity: 0; fill: var(--signal); }
-.sync-path { fill: none; stroke: var(--line); stroke-width: 2; stroke-dasharray: 6 6; }
-.cloud-shape { fill: var(--teal); opacity: .75; }
+/* canvas scenes */
+.scene{overflow-x:auto;border-radius:12px;-webkit-overflow-scrolling:touch}
+.scene canvas{display:block;width:100%;min-width:640px;border-radius:12px;background:var(--wash)}
+.scene.dark canvas{background:#061219}
 
-/* facts strip */
-.facts { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-block: 1px solid var(--line); }
-.fact { padding: 22px 20px 22px 0; }
-.fact + .fact { padding-left: 20px; border-left: 1px solid var(--line); }
-.fact b { display: block; font-family: var(--display); font-weight: 800; font-size: clamp(1.7rem, 3.4vw, 2.3rem); line-height: 1.05; font-variant-numeric: tabular-nums; }
-.fact span { display: block; font-size: .92rem; color: var(--ink-soft); margin-top: 6px; }
+.steps{display:flex;flex-wrap:wrap;gap:6px;list-style:none;margin:14px 0 0;padding:0}
+.steps li{font-family:var(--mono);font-size:.7rem;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-soft);border:1px solid var(--line);border-radius:999px;padding:4px 10px;transition:background .25s ease,color .25s ease,border-color .25s ease}
+.steps li.done{color:var(--teal-ink);border-color:var(--teal);background:var(--wash)}
+.steps li.on{color:#fff;background:var(--signal);border-color:var(--signal)}
 
-/* sections with left rail */
-section.block { display: grid; grid-template-columns: 190px minmax(0, 1fr); gap: 16px 48px; padding-block: 64px 8px; }
-.rail { font-family: var(--mono); font-size: .78rem; text-transform: uppercase; letter-spacing: .1em; color: var(--teal-ink); padding-top: 8px; }
-h2 { font-family: var(--display); font-weight: 800; font-size: clamp(1.6rem, 3vw, 2.2rem); line-height: 1.1; letter-spacing: -.01em; margin: 0 0 28px; text-wrap: balance; }
-h3 { font-family: var(--display); font-weight: 700; font-size: 1.3rem; line-height: 1.2; margin: 0 0 6px; }
+.layers{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:14px}
+.layers span{font-family:var(--mono);font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);margin-right:4px}
+.layers button{font-family:var(--mono);font-size:.74rem;letter-spacing:.03em;padding:6px 13px;border-radius:999px;border:1.5px solid var(--teal);background:transparent;color:var(--teal-ink);cursor:pointer}
+.layers button[aria-pressed="true"]{background:var(--teal);color:var(--on-teal)}
+.layers button:hover{border-color:var(--signal)}
 
-/* case studies */
-.case { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 28px 28px 24px; margin-bottom: 20px; }
-.case .tag { font-family: var(--mono); font-size: .74rem; letter-spacing: .08em; text-transform: uppercase; color: var(--signal); margin: 0 0 8px; }
-.case .sub { color: var(--ink-soft); margin: 0 0 18px; }
-.case dl { display: grid; grid-template-columns: 120px minmax(0, 1fr); gap: 12px 24px; margin: 0; }
-.case dt { font-family: var(--mono); font-size: .75rem; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-soft); padding-top: 4px; }
-.case dd { margin: 0; }
-.chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 18px 0 0; padding: 0; list-style: none; }
-.chips li { font-family: var(--mono); font-size: .76rem; background: var(--wash); color: var(--teal-ink); padding: 4px 10px; border-radius: 999px; }
+.bullets{margin:14px 0 0;padding-left:20px;color:var(--ink-soft)}
+.bullets li{margin-bottom:6px}
+.bullets li::marker{color:var(--teal)}
 
-/* experience */
-.job { display: grid; grid-template-columns: minmax(0, 1fr); gap: 6px; padding-bottom: 30px; margin-bottom: 30px; border-bottom: 1px solid var(--line); }
-.job:last-child { border-bottom: 0; margin-bottom: 0; padding-bottom: 0; }
-.job .when { font-family: var(--mono); font-size: .78rem; letter-spacing: .06em; color: var(--ink-soft); }
-.job ul { margin: 10px 0 0; padding-left: 20px; }
-.job li { margin-bottom: 8px; }
-.job li::marker { color: var(--teal); }
+/* mining svg */
+.scroll{overflow-x:auto}
+.scroll>svg{display:block;width:100%;min-width:560px;height:auto}
+.dev-body{fill:var(--surface);stroke:var(--ink-soft);stroke-width:2}
+.dev-screen{fill:var(--wash);stroke:var(--line);stroke-width:1.5}
+.queue-bar{fill:var(--teal)}
+.wifi{fill:none;stroke:var(--ink-soft);stroke-width:3;stroke-linecap:round}
+.wifi-dot{fill:var(--ink-soft)}
+.wifi-slash{stroke:var(--ink-soft);stroke-width:3;stroke-linecap:round}
+.sync-path{fill:none;stroke:var(--line);stroke-width:2;stroke-dasharray:6 6}
+.cloud{fill:var(--teal);opacity:.7}
+.stat-label{font-family:var(--mono);font-size:10px;letter-spacing:.06em;fill:var(--ink-soft);text-anchor:middle}
+.stat-on{opacity:0;fill:var(--signal)}
 
-/* skills */
-.skills { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px 36px; }
-.skills h3 { font-size: 1rem; font-family: var(--mono); text-transform: uppercase; letter-spacing: .08em; font-weight: 500; color: var(--teal-ink); margin-bottom: 8px; }
-.skills p { margin: 0; color: var(--ink); }
+.job{padding-bottom:28px;margin-bottom:28px;border-bottom:1px solid var(--line)}
+.job:last-child{border-bottom:0;margin-bottom:0;padding-bottom:0}
+.job .when{font-family:var(--mono);font-size:.78rem;letter-spacing:.06em;color:var(--ink-soft)}
+.job .where{color:var(--ink-soft);font-size:.92rem;margin-bottom:8px}
+.job ul{margin:10px 0 0;padding-left:20px}
+.job li{margin-bottom:8px}
+.job li::marker{color:var(--teal)}
+.skills{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px 36px}
+.skills h3{font-family:var(--mono);font-size:.8rem;text-transform:uppercase;letter-spacing:.08em;font-weight:500;color:var(--teal-ink);margin-bottom:8px}
+.contact{background:var(--teal-ink);color:#F0FAFB;border-radius:16px;padding:40px 36px;margin-top:72px;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:28px 48px}
+:root[data-theme="dark"] .contact{background:var(--surface);border:1px solid var(--line);color:var(--ink)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .contact{background:var(--surface);border:1px solid var(--line);color:var(--ink)}}
+.contact h2{margin-bottom:14px}
+.contact p{margin-bottom:12px}
+.contact a{color:inherit}
+.contact a:hover{color:var(--signal)}
+.rows{display:grid;gap:14px;align-content:start}
+.row{display:flex;flex-wrap:wrap;gap:4px 14px;align-items:baseline;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,.25);padding-bottom:12px}
+:root[data-theme="dark"] .row{border-color:var(--line)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .row{border-color:var(--line)}}
+.row .k{font-family:var(--mono);font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;opacity:.8}
+.row .v{font-family:var(--display);font-weight:700;font-size:1.05rem;overflow-wrap:anywhere;user-select:all}
+.copy{font-family:var(--mono);font-size:.72rem;background:transparent;color:inherit;border:1px solid currentColor;border-radius:6px;padding:3px 9px;cursor:pointer}
+.copy:hover{color:var(--signal)}
+footer{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 20px;margin-top:36px;font-family:var(--mono);font-size:.76rem;letter-spacing:.04em;color:var(--ink-soft)}
 
-.two { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px 36px; }
-.two p { margin: 0; }
-
-/* contact */
-.contact { background: var(--teal-ink); color: #F0FAFB; border-radius: 16px; padding: 40px 36px; margin-top: 72px; display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); gap: 28px 48px; }
-:root[data-theme="dark"] .contact { background: var(--surface); border: 1px solid var(--line); color: var(--ink); }
-@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .contact { background: var(--surface); border: 1px solid var(--line); color: var(--ink); } }
-.contact h2 { margin-bottom: 14px; }
-.contact p { margin: 0 0 12px; }
-.contact a { color: inherit; }
-.contact a:hover { color: var(--signal); }
-.contact .rows { display: grid; gap: 14px; align-content: start; }
-.row { display: flex; flex-wrap: wrap; gap: 4px 14px; align-items: baseline; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,.22); padding-bottom: 12px; }
-:root[data-theme="dark"] .row { border-color: var(--line); }
-@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .row { border-color: var(--line); } }
-.row .k { font-family: var(--mono); font-size: .74rem; letter-spacing: .08em; text-transform: uppercase; opacity: .8; }
-.row .v { font-family: var(--display); font-weight: 700; font-size: 1.05rem; overflow-wrap: anywhere; user-select: all; }
-.copy { font-family: var(--mono); font-size: .72rem; background: transparent; color: inherit; border: 1px solid currentColor; border-radius: 6px; padding: 3px 9px; cursor: pointer; }
-.copy:hover { color: var(--signal); }
-footer { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 20px; margin-top: 36px; font-family: var(--mono); font-size: .76rem; letter-spacing: .04em; color: var(--ink-soft); }
-
-/* subtle motion, resting state is fully visible */
-@media (prefers-reduced-motion: no-preference) {
-  .fig-dot { animation: pulse 3.2s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
-  .fig-dot.hot { animation-delay: .6s; }
-  @keyframes pulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.18); } }
-
-  .live-dot { animation: blink 1.6s ease-in-out infinite; }
-  @keyframes blink { 0%,100% { opacity: 1; } 50% { opacity: .25; } }
-
-  .cam-dot { animation: pulse 2.4s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
-
-  /* claims pipeline: a document travels Submitted -> Adjudication -> Reconciled,
-     the active stage is named above the track, and the HIPAA badge keeps pulsing
-     the whole time to say patient data stays protected throughout. */
-  .pipe-dot { animation: pipeMove 6s ease-in-out infinite; transform-box: fill-box; }
-  @keyframes pipeMove {
-    0%, 14% { transform: translateX(0); }
-    36%, 50% { transform: translateX(160px); }
-    72%, 86% { transform: translateX(320px); }
-    100% { transform: translateX(0); }
-  }
-  .pipe-node:nth-of-type(1) { animation: nodeGlow1 6s ease-in-out infinite; }
-  .pipe-node:nth-of-type(2) { animation: nodeGlow2 6s ease-in-out infinite; }
-  .pipe-node:nth-of-type(3) { animation: nodeGlow3 6s ease-in-out infinite; }
-  @keyframes nodeGlow1 { 0%, 18%, 95%, 100% { stroke: var(--signal); } 24%, 90% { stroke: var(--line); } }
-  @keyframes nodeGlow2 { 0%, 32%, 56% { stroke: var(--line); } 38%, 50% { stroke: var(--signal); } 62%, 100% { stroke: var(--line); } }
-  @keyframes nodeGlow3 { 0%, 68% { stroke: var(--line); } 74%, 88% { stroke: var(--signal); } 94%, 100% { stroke: var(--line); } }
-  .stage-label.s1 { animation: labelS1 6s ease-in-out infinite; }
-  .stage-label.s2 { animation: labelS2 6s ease-in-out infinite; }
-  .stage-label.s3 { animation: labelS3 6s ease-in-out infinite; }
-  @keyframes labelS1 { 0%, 24% { opacity: 1; } 30%, 100% { opacity: 0; } }
-  @keyframes labelS2 { 0%, 30% { opacity: 0; } 36%, 62% { opacity: 1; } 68%, 100% { opacity: 0; } }
-  @keyframes labelS3 { 0%, 68% { opacity: 0; } 74%, 94% { opacity: 1; } 100% { opacity: 0; } }
-  .lock-body, .lock-shackle { animation: lockPulse 2.6s ease-in-out infinite; }
-  @keyframes lockPulse { 0%, 100% { opacity: .6; } 50% { opacity: 1; } }
-
-  /* offline / IoT sync: the field device shows NO SIGNAL while it queues
-     entries, then flips to SYNCING and sends them to the server. */
-  .queue-bar { animation: queueFill 6s ease-in-out infinite; }
-  .queue-bar.q2 { animation-delay: .3s; }
-  .queue-bar.q3 { animation-delay: .6s; }
-  @keyframes queueFill {
-    0%, 8% { opacity: 0; transform: translateX(0); }
-    16%, 45% { opacity: 1; transform: translateX(0); }
-    60% { opacity: 0; transform: translateX(90px); }
-    61%, 100% { opacity: 0; transform: translateX(0); }
-  }
-  .wifi-arc, .wifi-dot { animation: wifiColor 6s ease-in-out infinite; }
-  @keyframes wifiColor { 0%, 40% { stroke: var(--ink-soft); fill: var(--ink-soft); } 45%, 75% { stroke: var(--signal); fill: var(--signal); } 80%, 100% { stroke: var(--ink-soft); fill: var(--ink-soft); } }
-  .wifi-slash { animation: slashFade 6s ease-in-out infinite; }
-  @keyframes slashFade { 0%, 40% { opacity: 1; } 45%, 75% { opacity: 0; } 80%, 100% { opacity: 1; } }
-  .label-off { animation: labelOffFade 6s ease-in-out infinite; }
-  @keyframes labelOffFade { 0%, 40% { opacity: 1; } 45%, 75% { opacity: 0; } 80%, 100% { opacity: 1; } }
-  .label-on { animation: labelOnFade 6s ease-in-out infinite; }
-  @keyframes labelOnFade { 0%, 40% { opacity: 0; } 45%, 75% { opacity: 1; } 80%, 100% { opacity: 0; } }
-  .sync-path { animation: flowLine 6s linear infinite; }
-  @keyframes flowLine { 0%, 40% { stroke-dashoffset: 0; stroke: var(--line); } 45%, 75% { stroke-dashoffset: -24; stroke: var(--signal); } 80%, 100% { stroke-dashoffset: -24; stroke: var(--line); } }
-  .cloud-shape { animation: cloudPulse 6s ease-in-out infinite; }
-  @keyframes cloudPulse { 0%, 40% { opacity: .55; } 45%, 75% { opacity: 1; } 80%, 100% { opacity: .55; } }
+@media (prefers-reduced-motion:no-preference){
+  .avail-dot{animation:blink 1.8s ease-in-out infinite}
+  @keyframes blink{0%,100%{opacity:1}50%{opacity:.25}}
+  .queue-bar{animation:queueFill 6s ease-in-out infinite}
+  .queue-bar.q2{animation-delay:.28s}
+  .queue-bar.q3{animation-delay:.56s}
+  @keyframes queueFill{0%,8%{opacity:0;transform:translateX(0)}16%,45%{opacity:1;transform:translateX(0)}60%{opacity:0;transform:translateX(80px)}61%,100%{opacity:0;transform:translateX(0)}}
+  .wifi,.wifi-dot{animation:wifiOn 6s ease-in-out infinite}
+  @keyframes wifiOn{0%,40%{stroke:var(--ink-soft);fill:var(--ink-soft)}45%,75%{stroke:var(--signal);fill:var(--signal)}80%,100%{stroke:var(--ink-soft);fill:var(--ink-soft)}}
+  .wifi-slash{animation:slashFade 6s ease-in-out infinite}
+  @keyframes slashFade{0%,40%{opacity:1}45%,75%{opacity:0}80%,100%{opacity:1}}
+  .lbl-off{animation:slashFade 6s ease-in-out infinite}
+  .lbl-on{animation:onFade 6s ease-in-out infinite}
+  @keyframes onFade{0%,40%{opacity:0}45%,75%{opacity:1}80%,100%{opacity:0}}
+  .sync-path{animation:flow 6s linear infinite}
+  @keyframes flow{0%,40%{stroke-dashoffset:0;stroke:var(--line)}45%,75%{stroke-dashoffset:-24;stroke:var(--signal)}80%,100%{stroke-dashoffset:-24;stroke:var(--line)}}
+  .cloud{animation:cloudPulse 6s ease-in-out infinite}
+  @keyframes cloudPulse{0%,40%{opacity:.5}45%,75%{opacity:1}80%,100%{opacity:.5}}
 }
 
-@media (max-width: 860px) {
-  .hero { grid-template-columns: minmax(0, 1fr); padding-block: 44px 36px; }
-  .figure { max-width: 420px; }
-  .facts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .fact:nth-child(3) { padding-left: 0; border-left: 0; }
-  .fact:nth-child(n+3) { border-top: 1px solid var(--line); }
-  section.block { grid-template-columns: minmax(0, 1fr); padding-block-start: 52px; }
-  .rail { padding-top: 0; }
-  .contact { grid-template-columns: minmax(0, 1fr); padding: 30px 22px; }
+@media (max-width:920px){
+  .hero{grid-template-columns:minmax(0,1fr)}
+  section.block{grid-template-columns:minmax(0,1fr);gap:8px}
+  .rail{padding-top:0}
+  .contact{grid-template-columns:minmax(0,1fr)}
 }
-@media (max-width: 560px) {
-  body { font-size: 17px; }
-  .case { padding: 22px 18px 18px; }
-  .case dl { grid-template-columns: minmax(0, 1fr); gap: 4px; }
-  .case dt { padding-top: 10px; }
-  .skills, .two { grid-template-columns: minmax(0, 1fr); }
+@media (max-width:640px){
+  body{font-size:16px}
+  .facts{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .fact:nth-child(3){padding-left:0;border-left:0}
+  .fact:nth-child(n+3){border-top:1px solid var(--line)}
+  .skills{grid-template-columns:minmax(0,1fr)}
+  .contact{padding:26px 20px}
+  .case{padding:16px}
 }
 </style>
-
+</head>
+<body>
 <div class="shell">
-  <header class="nav">
-    <a class="brand" href="#top">Jaspreet Singh</a>
-    <nav aria-label="Sections">
-      <ul>
-        <li><a href="#work">Work</a></li>
-        <li><a href="#experience">Experience</a></li>
-        <li><a href="#skills">Skills</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-    </nav>
-  </header>
 
-  <main id="top">
-    <section class="hero" aria-labelledby="headline">
-      <div>
-        <p class="eyebrow">Senior Frontend Team Lead &middot; Angular &middot; Healthcare</p>
-        <h1 id="headline">I build the Angular front ends for <em>healthcare software</em> that has to be right.</h1>
-        <p class="lede">6.5+ years shipping HIPAA-compliant claims platforms, live telehealth with computer vision, and offline-first field apps for clients in the US and South Africa. I have led a team of 8 and work remotely from India, with overlap on US, UK and EU hours.</p>
-        <div class="cta">
-          <a class="btn primary" href="https://drive.google.com/file/d/1D6gm-311sma1x6n0lwcFu8lFNU3C5_1m/view" target="_blank" rel="noopener">View resume</a>
-          <a class="btn ghost" href="#contact">Get in touch</a>
-        </div>
-        <p class="avail"><span class="avail-dot" aria-hidden="true"></span>Available immediately &middot; Full-time remote, contract or B2B</p>
-      </div>
+<header class="nav">
+  <a class="brand" href="#top">Jaspreet Singh</a>
+  <nav aria-label="Sections">
+    <ul>
+      <li><a href="#rcm">RCM</a></li>
+      <li><a href="#rpm">RPM</a></li>
+      <li><a href="#holistic">Holistic</a></li>
+      <li><a href="#mining">Mining</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+</header>
 
-      <figure class="figure" aria-label="Animated diagram: a camera feed is turned into tracked joint landmarks, and the measured angle is sent to a clinician">
-        <svg viewBox="0 0 320 430" role="img" aria-labelledby="figtitle">
-          <title id="figtitle">A live video feed is tracked as hip, knee and ankle landmarks; the knee angle is recalculated continuously and sent to a clinician panel, the same pipeline used in the telehealth app</title>
+<main id="top">
 
-          <rect class="cam-body" x="14" y="16" width="38" height="26" rx="5"/>
-          <path class="cam-lens" d="M52 24 L66 18 V40 L52 34 Z"/>
-          <circle class="cam-dot" cx="33" cy="29" r="4"/>
-          <text class="fig-label" x="14" y="56">LIVE VIDEO</text>
-          <path class="feed-wire" d="M60 44 Q 100 60 150 62"/>
-
-          <path class="fig-guide" d="M150 70 V340"/>
-          <path class="fig-line" d="M150 70 L190 200"/>
-          <path class="fig-arc" id="arcPath" d="M177.1 157.9 A44 44 0 0 0 177.1 242.1"/>
-          <circle class="fig-dot" cx="150" cy="70" r="9"/>
-          <circle class="fig-dot hot" cx="190" cy="200" r="9"/>
-          <g id="shin">
-            <path class="fig-line" d="M190 200 L150 330"/>
-            <circle class="fig-dot" cx="150" cy="330" r="9"/>
-            <text class="fig-label" x="168" y="348">ANKLE</text>
-          </g>
-          <text class="fig-label" x="168" y="62">HIP</text>
-          <text class="fig-label" x="208" y="204">KNEE</text>
-          <text class="fig-angle" id="angleText" x="128" y="209" text-anchor="end">146&deg;</text>
-
-          <path class="feed-wire" d="M150 335 V362"/>
-          <rect class="clinician-panel" x="40" y="366" width="240" height="56" rx="10"/>
-          <text class="clinician-label" x="160" y="386" text-anchor="middle">CLINICIAN SEES, REMOTELY</text>
-          <text class="fig-angle" id="angleEcho" x="160" y="412" text-anchor="middle">146&deg; ROM</text>
-        </svg>
-        <figcaption><span class="live-dot" aria-hidden="true"></span>Live demo &mdash; a video feed is tracked as joint landmarks, the knee angle is recalculated every frame, and the same number reaches the clinician's screen remotely.</figcaption>
-      </figure>
-    </section>
-
-    <div class="facts" role="list">
-      <div class="fact" role="listitem"><b class="count" data-target="6.5" data-decimals="1" data-suffix="+">6.5+</b><span>years building Angular and TypeScript apps</span></div>
-      <div class="fact" role="listitem"><b class="count" data-target="8" data-decimals="0" data-suffix="">8</b><span>engineers led, with code review and mentoring</span></div>
-      <div class="fact" role="listitem"><b class="count" data-target="1.9" data-decimals="1" data-suffix="M+">1.9M+</b><span>claim records handled in a HIPAA-compliant platform</span></div>
-      <div class="fact" role="listitem"><b class="count" data-prefix="~" data-target="40" data-decimals="0" data-suffix="%">~40%</b><span>load-time reduction on a production app</span></div>
+<section class="hero">
+  <div>
+    <p class="eyebrow">Senior Frontend Team Lead &middot; Angular &middot; 6.5+ years</p>
+    <h1>I build the frontend for <em id="rot">healthcare</em> software that can&rsquo;t be wrong.</h1>
+    <p class="lede">Revenue cycle management, remote patient monitoring and offline-first field apps for clients in the US and South Africa. I lead an 8-person team and work remotely from India, with overlap on US, UK and EU hours.</p>
+    <div class="cta">
+      <a class="btn primary" href="#contact">Start a conversation</a>
+      <a class="btn ghost" href="https://drive.google.com/file/d/1D6gm-311sma1x6n0lwcFu8lFNU3C5_1m/view" target="_blank" rel="noopener">Open resume</a>
     </div>
+    <p class="avail"><span class="avail-dot" aria-hidden="true"></span>Available at short notice &middot; Remote from India &middot; IST</p>
+  </div>
+  <nav class="index" aria-label="Showcase index">
+    <a href="#rcm"><span class="n">01</span><b>Revenue cycle management</b><span>A claim&rsquo;s whole journey, check-in to payment posted</span></a>
+    <a href="#rpm"><span class="n">02</span><b>Remote patient monitoring</b><span>Home exercise data streamed to a clinician dashboard</span></a>
+    <a href="#holistic"><span class="n">03</span><b>MediaPipe Holistic</b><span>Body, hands and face tracked, angles computed live</span></a>
+    <a href="#mining"><span class="n">04</span><b>Offline-first field app</b><span>Mining-safety data that syncs when the link returns</span></a>
+  </nav>
+</section>
 
-    <section class="block" id="work" aria-labelledby="work-h">
-      <div class="rail">Selected work</div>
-      <div>
-        <h2 id="work-h">Three products, all in regulated or low-connectivity settings.</h2>
+<div class="facts">
+  <div class="fact"><b>1.9M+</b><span>claim records on a US revenue-cycle platform</span></div>
+  <div class="fact"><b>8</b><span>engineers led, with code review and mentoring</span></div>
+  <div class="fact"><b>~40%</b><span>load-time cut on a production app</span></div>
+  <div class="fact"><b>70%</b><span>cut in API latency by optimizing Node.js services</span></div>
+</div>
 
-        <article class="case">
-          <p class="tag">US client &middot; Healthcare</p>
-          <h3>Claims and revenue cycle platform</h3>
-          <p class="sub">Frontend for a HIPAA-compliant RCM system, built with Angular, TypeScript, Java and SQL.</p>
-          <dl>
-            <dt>Problem</dt>
-            <dd>Claims have to be submitted, followed through adjudication and reconciled, all while patient data stays protected.</dd>
-            <dt>What I built</dt>
-            <dd>The claims submission, adjudication tracking and reconciliation workflows, plus the Java and SQL pieces behind them.</dd>
-            <dt>Outcome</dt>
-            <dd>A platform handling 1.9M+ claim records, with HIPAA-compliant handling of patient data across the claim lifecycle.</dd>
-          </dl>
-          <figure class="figure pipeline-figure">
-            <svg class="pipeline-svg" viewBox="0 0 400 98" aria-hidden="true">
-              <rect class="lock-body" x="138" y="4" width="14" height="10" rx="2"/>
-              <path class="lock-shackle" d="M141 4 v-3 a5 5 0 0 1 8 0 v3"/>
-              <text class="hipaa-label" x="160" y="13">HIPAA &middot; DATA PROTECTED</text>
+<!-- 01 RCM -->
+<section class="block" id="rcm">
+  <div class="rail">01 &middot; RCM</div>
+  <div>
+    <h2>Revenue cycle management, from check-in to payment posted.</h2>
+    <article class="case">
+      <p class="tag">HIPAA-compliant claims platform &middot; US client</p>
+      <p class="sub">Frontend for a revenue-cycle system built with Angular and TypeScript, with Java and SQL behind it: claim submission, adjudication tracking and reconciliation, with patient data protected at every stage.</p>
+      <div class="scene"><canvas id="rcmCanvas" style="aspect-ratio:900/360" role="img" aria-label="Animated story of a claim. A patient walks to the front desk and hands over an insurance card. Eligibility is verified. A claim form fills in with ICD-10 and CPT codes, a scanner checks it for errors, and it folds into a paper plane that flies to the insurance payer as an EDI 837 file. The payer approves it, and payment coins drop into a jar as the payment is posted."></canvas></div>
+      <ol class="steps" id="rcmSteps" aria-label="Revenue cycle stages">
+        <li>Check-in</li><li>Eligibility</li><li>Coding</li><li>Claim scrubbing</li><li>Submit 837</li><li>Adjudication</li><li>Remit 835</li><li>Payment posted</li>
+      </ol>
+      <p class="note">Illustrative flow. Codes, amounts and claim data are simulated.</p>
+      <ul class="chips"><li>Angular</li><li>TypeScript</li><li>Java</li><li>SQL</li><li>Ag-Grid</li><li>HIPAA</li><li>1.9M+ claim records</li></ul>
+    </article>
+  </div>
+</section>
 
-              <text class="stage-label s1" x="190" y="34" text-anchor="middle">NOW: CLAIM SUBMITTED</text>
-              <text class="stage-label s2" x="190" y="34" text-anchor="middle">NOW: UNDER ADJUDICATION</text>
-              <text class="stage-label s3" x="190" y="34" text-anchor="middle">NOW: RECONCILED &amp; PAID</text>
+<!-- 02 RPM -->
+<section class="block" id="rpm">
+  <div class="rail">02 &middot; RPM</div>
+  <div>
+    <h2>Remote patient monitoring, from the living room to the clinic.</h2>
+    <article class="case">
+      <p class="tag">Telehealth &middot; musculoskeletal monitoring</p>
+      <p class="sub">Remote physiotherapy over live video. Pose tracking measures the knee angle on every rep, and each result is sent to the clinician&rsquo;s dashboard, so progress is tracked between visits without extra hardware.</p>
+      <div class="scene"><canvas id="rpmCanvas" style="aspect-ratio:900/340" role="img" aria-label="A seated patient at home does knee extensions in front of a phone camera. The knee is tracked and its angle shown live. After each rep, the peak angle flies as a data packet to a clinician dashboard, where it is added to a chart against a 170 degree target."></canvas></div>
+      <p class="note">Patient, angles and session data are illustrative.</p>
+      <ul class="chips"><li>Angular</li><li>MediaPipe</li><li>WebRTC</li><li>Agora</li><li>Zoom SDK</li><li>WebSockets</li><li>No extra hardware</li></ul>
+    </article>
+  </div>
+</section>
 
-              <line x1="30" y1="58" x2="350" y2="58" class="pipe-track"/>
-              <circle cx="30" cy="58" r="7" class="pipe-node"/>
-              <circle cx="190" cy="58" r="7" class="pipe-node"/>
-              <circle cx="350" cy="58" r="7" class="pipe-node"/>
-              <circle cx="30" cy="58" r="5" class="pipe-dot"/>
-              <text x="30" y="82" class="pipe-label" text-anchor="middle">SUBMITTED</text>
-              <text x="190" y="82" class="pipe-label" text-anchor="middle">ADJUDICATION</text>
-              <text x="350" y="82" class="pipe-label" text-anchor="middle">RECONCILED</text>
-            </svg>
-            <figcaption>A claim moving through submission, adjudication and reconciliation &mdash; the workflow this frontend tracks across 1.9M+ records, with patient data encrypted at every stage.</figcaption>
-          </figure>
-          <ul class="chips"><li>Angular</li><li>TypeScript</li><li>Java</li><li>SQL</li><li>Ag-Grid</li><li>HIPAA</li></ul>
-        </article>
-
-        <article class="case">
-          <p class="tag">US client &middot; Telehealth</p>
-          <h3>Musculoskeletal monitoring app</h3>
-          <p class="sub">Remote physiotherapy assessment over live video, with motion tracking in the browser.</p>
-          <dl>
-            <dt>Problem</dt>
-            <dd>Remote physiotherapy assessment depends on how far a joint moves, which a plain video call cannot measure.</dd>
-            <dt>What I built</dt>
-            <dd>Real-time pose tracking with Google MediaPipe, joint-angle calculation during the session, and the video layer itself. I integrated three video providers (Agora, Zoom and WebRTC) in production healthcare apps.</dd>
-            <dt>Outcome</dt>
-            <dd>Joint angles are calculated and shown during the live session, without extra hardware.</dd>
-          </dl>
-          <ul class="chips"><li>Angular</li><li>MediaPipe</li><li>WebRTC</li><li>Agora</li><li>Zoom SDK</li><li>WebSockets</li></ul>
-        </article>
-
-        <article class="case">
-          <p class="tag">South Africa client &middot; Mining safety</p>
-          <h3>Offline-first field data app</h3>
-          <p class="sub">A mobile app for safety inspections where the network drops without warning.</p>
-          <dl>
-            <dt>Problem</dt>
-            <dd>Field sites lose signal, so inspection data has to be captured on the device and sent later.</dd>
-            <dt>What I built</dt>
-            <dd>An offline-first app that records data on the device and syncs automatically when the connection returns, with data grids for reviewing entries.</dd>
-            <dt>Outcome</dt>
-            <dd>Data is captured on the device first, so a dropped connection does not lose entries.</dd>
-          </dl>
-          <figure class="figure sync-figure">
-            <svg class="sync-svg" viewBox="0 0 340 112" aria-hidden="true">
-              <rect x="18" y="18" width="50" height="64" rx="8" class="dev-body"/>
-              <rect x="26" y="28" width="34" height="44" rx="3" class="dev-screen"/>
-              <rect x="31" y="36" width="24" height="6" rx="2" class="queue-bar q1"/>
-              <rect x="31" y="46" width="24" height="6" rx="2" class="queue-bar q2"/>
-              <rect x="31" y="56" width="24" height="6" rx="2" class="queue-bar q3"/>
-              <text x="43" y="92" class="fig-label" text-anchor="middle">FIELD DEVICE</text>
-
-              <g aria-hidden="true">
-                <path class="wifi-arc" d="M150 66 Q170 44 190 66"/>
-                <path class="wifi-arc" d="M159 70 Q170 58 181 70"/>
-                <circle class="wifi-dot" cx="170" cy="76" r="3.4"/>
-                <line class="wifi-slash" x1="146" y1="50" x2="194" y2="84"/>
-              </g>
-              <text class="status-label label-off" x="170" y="100">NO SIGNAL</text>
-              <text class="status-label label-on" x="170" y="100">SYNCING&hellip;</text>
-
-              <path class="sync-path" d="M80 54 H260"/>
-              <path d="M292 62 a14 14 0 0 1 2-28 a18 18 0 0 1 34-4 a14 14 0 0 1 -2 32z" class="cloud-shape"/>
-              <text x="305" y="92" class="fig-label" text-anchor="middle">SERVER</text>
-            </svg>
-            <figcaption>The field device shows NO SIGNAL and queues inspection entries locally; once a connection is found it flips to SYNCING and sends them on &mdash; the offline-first pattern used for edge/IoT devices with unreliable signal.</figcaption>
-          </figure>
-          <ul class="chips"><li>Angular</li><li>Ionic</li><li>Ag-Grid</li><li>PWA</li><li>Offline sync</li></ul>
-        </article>
+<!-- 03 HOLISTIC -->
+<section class="block" id="holistic">
+  <div class="rail">03 &middot; Holistic</div>
+  <div>
+    <h2>Holistic tracking: body, hands and face in one model.</h2>
+    <article class="case">
+      <p class="tag">Hands-on with MediaPipe Holistic</p>
+      <p class="sub">One video stream, three tracking layers. The knee, hip and shoulder angles below are calculated from the landmark positions on every frame, the same way the app does it in the browser.</p>
+      <div class="scene dark"><canvas id="holCanvas" style="aspect-ratio:900/420" role="img" aria-label="A camera viewfinder tracks a person doing overhead squats. Pose landmarks, hand landmarks and a face mesh are drawn over the body. A side panel shows live knee, hip and shoulder angles, a rep counter, a depth meter and form checks."></canvas></div>
+      <div class="layers" role="group" aria-label="Tracking layers">
+        <span>Layers</span>
+        <button type="button" aria-pressed="true" data-layer="pose">Pose &middot; 33</button>
+        <button type="button" aria-pressed="true" data-layer="hands">Hands &middot; 21 &times; 2</button>
+        <button type="button" aria-pressed="true" data-layer="face">Face mesh &middot; 468</button>
       </div>
-    </section>
+      <p class="note">The figure is simulated. The angle math runs live on its landmarks.</p>
+    </article>
+  </div>
+</section>
 
-    <section class="block" id="experience" aria-labelledby="exp-h">
-      <div class="rail">Experience</div>
-      <div>
-        <h2 id="exp-h">Where I have done the work.</h2>
-
-        <div class="job">
-          <div class="when">MAR 2022 &ndash; NOV 2026</div>
-          <h3>Senior Frontend Team Lead, Ditstek Innovations</h3>
-          <div style="color:var(--ink-soft)">Mohali, India</div>
-          <ul>
-            <li>Led an 8-member team delivering Angular enterprise applications for healthcare and mining-safety clients in the US and South Africa.</li>
-            <li>Architected a micro-frontend structure shared across client projects to make maintenance and deployment faster.</li>
-            <li>Owned full-stack delivery across Angular, TypeScript, Java and SQL, and used AI-assisted development (Devin, Claude, Cursor, Copilot), reviewing all generated code before release.</li>
-            <li>Set code review standards and mentored junior developers on Angular architecture.</li>
-          </ul>
-        </div>
-
-        <div class="job">
-          <div class="when">MAR 2020 &ndash; FEB 2022</div>
-          <h3>Frontend Developer, Zimblecode Pvt Limited</h3>
-          <div style="color:var(--ink-soft)">Mohali, India</div>
-          <ul>
-            <li>Cut API latency by 70% by optimizing the Node.js services behind client-facing workflows.</li>
-            <li>Built AI-assisted health-monitoring dashboards with Angular and TensorFlow.js.</li>
-            <li>Delivered responsive safety-compliance tools used by 3 industrial clients in South Africa and Nigeria.</li>
-          </ul>
-        </div>
+<!-- 04 MINING -->
+<section class="block" id="mining">
+  <div class="rail">04 &middot; Mining</div>
+  <div>
+    <h2>Offline-first field data, for sites with no signal.</h2>
+    <article class="case">
+      <p class="tag">South Africa client &middot; mining safety</p>
+      <p class="sub">An offline-first app for safety inspections on remote mining sites. Entries are stored on the device first, so a dropped connection never loses data, and the app syncs automatically when the connection returns.</p>
+      <div class="scroll" style="max-width:680px">
+        <svg viewBox="0 0 268 90" role="img" aria-label="A field device shows no signal and queues entries locally, then syncs to the server when the connection returns">
+          <rect class="dev-body" x="12" y="10" width="40" height="54" rx="7"/>
+          <rect class="dev-screen" x="19" y="18" width="26" height="38" rx="3"/>
+          <rect class="queue-bar" x="23" y="24" width="18" height="5" rx="1.6"/>
+          <rect class="queue-bar q2" x="23" y="32" width="18" height="5" rx="1.6"/>
+          <rect class="queue-bar q3" x="23" y="40" width="18" height="5" rx="1.6"/>
+          <text class="stat-label" x="32" y="82">FIELD</text>
+          <path class="sync-path" d="M60 36 H196"/>
+          <path class="wifi" d="M112 42 Q128 26 144 42"/>
+          <path class="wifi" d="M119 48 Q128 39 137 48"/>
+          <circle class="wifi-dot" cx="128" cy="54" r="2.6"/>
+          <line class="wifi-slash" x1="110" y1="24" x2="146" y2="58"/>
+          <text class="stat-label lbl-off" x="128" y="82">NO SIGNAL</text>
+          <text class="stat-label lbl-on stat-on" x="128" y="82">SYNCING</text>
+          <path class="cloud" d="M214 46 a11 11 0 0 1 1.6 -22 a14 14 0 0 1 26.4 -3 a11 11 0 0 1 -1.6 25z"/>
+          <text class="stat-label" x="228" y="82">SERVER</text>
+        </svg>
       </div>
-    </section>
+      <ul class="chips"><li>Angular</li><li>Ionic</li><li>Ag-Grid</li><li>PWA</li><li>Offline sync</li></ul>
+    </article>
+  </div>
+</section>
 
-    <section class="block" id="skills" aria-labelledby="skills-h">
-      <div class="rail">Skills</div>
-      <div>
-        <h2 id="skills-h">What I use day to day.</h2>
-        <div class="skills">
-          <div><h3>Frontend</h3><p>Angular 14 to 20, TypeScript, RxJS, Signals, standalone components, NgRx, Nx, Angular Material, Ionic, Ag-Grid, PWA, micro-frontends</p></div>
-          <div><h3>Backend and data</h3><p>Java with Spring Boot, SQL, Node.js, Express, REST APIs, MongoDB, Firebase, WebSockets</p></div>
-          <div><h3>Real time and AI</h3><p>WebRTC, Agora, Zoom SDK, Google MediaPipe, TensorFlow.js, OpenCV</p></div>
-          <div><h3>Practice</h3><p>Code review, mentoring, Jasmine and Jest, Git, Docker, CI/CD, Agile, HIPAA-aware engineering</p></div>
-        </div>
-      </div>
-    </section>
+<section class="block" id="experience">
+  <div class="rail">Experience</div>
+  <div>
+    <h2>Where I have done the work.</h2>
+    <div class="job">
+      <div class="when">Mar 2022 &ndash; Present</div>
+      <h3>Senior Frontend Team Lead &mdash; Ditstek Innovations</h3>
+      <p class="where">Mohali, India</p>
+      <ul>
+        <li>Lead an <b>8-member team</b> delivering Angular enterprise applications for healthcare and mining-safety clients in the US and South Africa.</li>
+        <li>Architected a <b>micro-frontend structure</b> shared across client projects to make maintenance and deployment faster.</li>
+        <li>Own full-stack delivery across Angular, TypeScript, Java and SQL, and use AI-assisted development (Devin, Claude, Cursor, Copilot), reviewing all generated code before release.</li>
+        <li>Set code review standards and mentor junior developers on Angular architecture.</li>
+      </ul>
+    </div>
+    <div class="job">
+      <div class="when">Mar 2020 &ndash; Feb 2022</div>
+      <h3>Frontend Developer &mdash; Zimblecode Pvt Limited</h3>
+      <p class="where">Mohali, India</p>
+      <ul>
+        <li>Cut <b>API latency by 70%</b> by optimizing the Node.js services behind client-facing workflows.</li>
+        <li>Built AI-assisted health-monitoring dashboards with Angular and TensorFlow.js.</li>
+        <li>Delivered responsive safety-compliance tools used by 3 industrial clients in South Africa and Nigeria.</li>
+      </ul>
+    </div>
+  </div>
+</section>
 
-    <section class="block" id="background" aria-labelledby="bg-h">
-      <div class="rail">Background</div>
-      <div>
-        <h2 id="bg-h">Certifications and education.</h2>
-        <div class="two">
-          <div>
-            <h3>Certifications</h3>
-            <p>IBM AI Developer Professional Certificate, IBM (Coursera), Sep 2025</p>
-            <p style="margin-top:8px">Google Prompting Essentials Specialization, Google (Coursera), Aug 2025</p>
-          </div>
-          <div>
-            <h3>Education</h3>
-            <p>B.Tech, Chandigarh Group of Colleges, Punjab, 2019</p>
-            <p style="margin-top:8px">English (professional), Hindi (native)</p>
-          </div>
-        </div>
-      </div>
-    </section>
+<section class="block" id="stack">
+  <div class="rail">Stack</div>
+  <div>
+    <h2>What I use day to day.</h2>
+    <div class="skills">
+      <div><h3>Frontend</h3><p>Angular 14 to 20, TypeScript, RxJS, Signals, standalone components, NgRx, Nx, Angular Material, Ionic, Ag-Grid, PWA, micro-frontends</p></div>
+      <div><h3>Backend &amp; data</h3><p>Java with Spring Boot, SQL, Node.js, Express, REST APIs, MongoDB, Firebase, WebSockets</p></div>
+      <div><h3>Real time &amp; AI</h3><p>WebRTC, Agora, Zoom SDK, Google MediaPipe (Pose and Holistic), TensorFlow.js, OpenCV</p></div>
+      <div><h3>Practice</h3><p>Code review, mentoring, Jasmine and Jest, Git, Docker, CI/CD, Agile, HIPAA-aware engineering</p></div>
+      <div><h3>Certifications</h3><p>IBM AI Developer Professional Certificate (IBM, Coursera, Sep 2025)</p><p>Google Prompting Essentials Specialization (Google, Coursera, Aug 2025)</p></div>
+      <div><h3>Education</h3><p>B.Tech, Chandigarh Group of Colleges, Punjab, 2019</p><p>English (professional), Hindi (native)</p></div>
+    </div>
+  </div>
+</section>
 
-    <section class="contact" id="contact" aria-labelledby="contact-h">
-      <div>
-        <h2 id="contact-h">Looking for a remote Angular lead in healthcare?</h2>
-        <p>I am available immediately for full-time remote roles, and open to contract or B2B work. I am based in India (IST) and can overlap with US, UK and EU hours.</p>
-        <p><a href="https://drive.google.com/file/d/1D6gm-311sma1x6n0lwcFu8lFNU3C5_1m/view" target="_blank" rel="noopener">Open my resume</a></p>
-      </div>
-      <div class="rows">
-        <div class="row"><span class="k">Email</span><span class="v" id="v-email">ijasss7525@gmail.com</span><button class="copy" type="button" data-copy="v-email">Copy</button></div>
-        <div class="row"><span class="k">Phone</span><span class="v" id="v-phone">+91 9888304031</span><button class="copy" type="button" data-copy="v-phone">Copy</button></div>
-        <div class="row"><span class="k">LinkedIn</span><a class="v" href="https://www.linkedin.com/in/jasss7525" target="_blank" rel="noopener">linkedin.com/in/jasss7525</a><span></span></div>
-      </div>
-    </section>
-  </main>
+<section class="contact" id="contact">
+  <div>
+    <h2>Looking for a remote Angular lead in healthcare?</h2>
+    <p>I am available at short notice for full-time remote roles, and open to contract or B2B work. Based in Punjab, India (IST), with overlap on US, UK and EU hours.</p>
+  </div>
+  <div class="rows">
+    <div class="row"><span class="k">Email</span><span class="v" id="c-email">ijasss7525@gmail.com</span><button class="copy" type="button" data-copy="c-email">Copy</button></div>
+    <div class="row"><span class="k">Phone</span><span class="v" id="c-phone">+91 9888304031</span><button class="copy" type="button" data-copy="c-phone">Copy</button></div>
+    <div class="row"><span class="k">LinkedIn</span><a class="v" href="https://www.linkedin.com/in/jasss7525" target="_blank" rel="noopener">linkedin.com/in/jasss7525</a></div>
+    <div class="row"><span class="k">Resume</span><a class="v" href="https://drive.google.com/file/d/1D6gm-311sma1x6n0lwcFu8lFNU3C5_1m/view" target="_blank" rel="noopener">Open the full resume</a></div>
+  </div>
+</section>
 
-  <footer>
-    <span>Jaspreet Singh &middot; Senior Frontend Team Lead</span>
-    <span>Remote &middot; India (IST)</span>
-  </footer>
+</main>
+<footer>
+  <span>Jaspreet Singh &mdash; Senior Frontend Team Lead</span>
+  <span>Kharar, Punjab, India</span>
+</footer>
 </div>
 
 <script>
-document.querySelectorAll('.copy').forEach(function (btn) {
-  btn.addEventListener('click', function () {
-    var el = document.getElementById(btn.getAttribute('data-copy'));
-    var text = el ? el.textContent.trim() : '';
-    var done = function () { btn.textContent = 'Copied'; setTimeout(function () { btn.textContent = 'Copy'; }, 1600); };
-    var fallback = function () {
-      try {
-        var r = document.createRange(); r.selectNodeContents(el);
-        var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
-        btn.textContent = 'Selected'; setTimeout(function () { btn.textContent = 'Copy'; }, 1600);
-      } catch (e) {}
-    };
-    if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText(text).then(done, fallback);
-    } else { fallback(); }
-  });
-});
-
 (function () {
-  var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (reduceMotion) return;
+  var reduce = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+  var D = Math.PI / 180;
+  var MONO = '"JetBrains Mono", ui-monospace, monospace';
+  var DISP = '"Bricolage Grotesque", "Segoe UI", sans-serif';
+  var BODY = '"Source Sans 3", "Segoe UI", sans-serif';
 
-  /* Live goniometer: rotates the shin about the knee and recalculates the
-     angle and arc every frame, the same geometry used in the telehealth
-     joint-angle feature. */
-  var shin = document.getElementById('shin');
-  var arc = document.getElementById('arcPath');
-  var angleText = document.getElementById('angleText');
-  var angleEcho = document.getElementById('angleEcho');
-  if (shin && arc && angleText && 'requestAnimationFrame' in window) {
-    var cx = 190, cy = 200, radius = 44;
-    var hipAngle = Math.atan2(70 - cy, 150 - cx);
-    var ankleRestAngle = Math.atan2(330 - cy, 150 - cx);
-    var restDeg = 146;
-    function polar(a) { return { x: cx + radius * Math.cos(a), y: cy + radius * Math.sin(a) }; }
-    function frame(t) {
-      var kneeDeg = restDeg + 14 * Math.sin(t / 1500);
-      var rotateDeg = -(kneeDeg - restDeg);
-      shin.setAttribute('transform', 'rotate(' + rotateDeg.toFixed(2) + ' ' + cx + ' ' + cy + ')');
-      var ankleAngle = ankleRestAngle + (rotateDeg * Math.PI / 180);
-      var p1 = polar(hipAngle), p2 = polar(ankleAngle);
-      arc.setAttribute('d', 'M' + p1.x.toFixed(1) + ' ' + p1.y.toFixed(1) + ' A' + radius + ' ' + radius + ' 0 0 0 ' + p2.x.toFixed(1) + ' ' + p2.y.toFixed(1));
-      var label = Math.round(kneeDeg) + '°';
-      angleText.textContent = label;
-      if (angleEcho) angleEcho.textContent = label + ' ROM';
-      requestAnimationFrame(frame);
-    }
-    requestAnimationFrame(frame);
+  /* ---------- small helpers ---------- */
+  function clamp(x, a, b) { return Math.max(a, Math.min(b, x)); }
+  function lerp(a, b, t) { return a + (b - a) * t; }
+  function ease(x) { x = clamp(x, 0, 1); return x < .5 ? 2 * x * x : 1 - Math.pow(-2 * x + 2, 2) / 2; }
+  function back(x) { x = clamp(x, 0, 1); var c1 = 1.70158, c3 = c1 + 1; return 1 + c3 * Math.pow(x - 1, 3) + c1 * Math.pow(x - 1, 2); }
+  function prog(T, a, b) { return clamp((T - a) / (b - a), 0, 1); }
+  function pad2(n) { return (n < 10 ? '0' : '') + n; }
+  function rgba(hex, a) {
+    hex = (hex || '#000000').replace('#', '');
+    if (hex.length === 3) hex = hex.split('').map(function (c) { return c + c; }).join('');
+    var n = parseInt(hex, 16);
+    return 'rgba(' + (n >> 16 & 255) + ',' + (n >> 8 & 255) + ',' + (n & 255) + ',' + a + ')';
+  }
+  function rr(ctx, x, y, w, h, r) {
+    ctx.beginPath(); ctx.moveTo(x + r, y);
+    ctx.arcTo(x + w, y, x + w, y + h, r); ctx.arcTo(x + w, y + h, x, y + h, r);
+    ctx.arcTo(x, y + h, x, y, r); ctx.arcTo(x, y, x + w, y, r); ctx.closePath();
+  }
+  function txt(ctx, s, x, y, size, fam, color, align, w) {
+    ctx.font = (w || 500) + ' ' + size + 'px ' + fam;
+    ctx.fillStyle = color; ctx.textAlign = align || 'left'; ctx.textBaseline = 'alphabetic';
+    ctx.fillText(s, x, y);
+  }
+  function line(ctx, x1, y1, x2, y2) { ctx.beginPath(); ctx.moveTo(x1, y1); ctx.lineTo(x2, y2); ctx.stroke(); }
+  function check(ctx, x, y, col, s) {
+    s = s || 1; ctx.save(); ctx.strokeStyle = col; ctx.lineWidth = 2.2; ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+    ctx.beginPath(); ctx.moveTo(x - 4 * s, y); ctx.lineTo(x - 1 * s, y + 3 * s); ctx.lineTo(x + 5 * s, y - 4 * s); ctx.stroke(); ctx.restore();
+  }
+  function pill(ctx, x, y, s, col, bg) {
+    ctx.font = '600 9px ' + MONO; var w = ctx.measureText(s).width + 22;
+    ctx.fillStyle = bg; rr(ctx, x - w / 2, y - 11, w, 22, 11); ctx.fill();
+    ctx.strokeStyle = col; ctx.lineWidth = 1.5; ctx.stroke();
+    txt(ctx, s, x, y + 3.5, 9, MONO, col, 'center', 600);
+  }
+  function arcBetween(ctx, c, r, a1, a2, col, w) {
+    var d = a2 - a1; while (d > Math.PI) d -= 2 * Math.PI; while (d < -Math.PI) d += 2 * Math.PI;
+    ctx.beginPath(); ctx.arc(c[0], c[1], r, a1, a1 + d, d < 0); ctx.strokeStyle = col; ctx.lineWidth = w || 2.5; ctx.stroke();
+  }
+  function angAt(a, b, c) {
+    var ux = a[0] - b[0], uy = a[1] - b[1], vx = c[0] - b[0], vy = c[1] - b[1];
+    var d = (ux * vx + uy * vy) / ((Math.hypot(ux, uy) * Math.hypot(vx, vy)) || 1);
+    return Math.acos(clamp(d, -1, 1)) / D;
   }
 
-  /* Count the headline numbers up once, when the facts strip scrolls into view. */
-  var counters = document.querySelectorAll('.count');
-  var factsEl = document.querySelector('.facts');
-  if (counters.length && factsEl && 'IntersectionObserver' in window) {
-    var started = false;
-    var obs = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (!entry.isIntersecting || started) return;
-        started = true;
-        counters.forEach(function (el) {
-          var target = parseFloat(el.getAttribute('data-target'));
-          var decimals = parseInt(el.getAttribute('data-decimals') || '0', 10);
-          var prefix = el.getAttribute('data-prefix') || '';
-          var suffix = el.getAttribute('data-suffix') || '';
-          var start = performance.now();
-          var duration = 1100;
-          function step(now) {
-            var p = Math.min(1, (now - start) / duration);
-            var eased = 1 - Math.pow(1 - p, 3);
-            el.textContent = prefix + (target * eased).toFixed(decimals) + suffix;
-            if (p < 1) requestAnimationFrame(step);
-          }
-          requestAnimationFrame(step);
-        });
-        obs.disconnect();
+  /* ---------- theme ---------- */
+  var C = {};
+  function readTheme() {
+    var cs = getComputedStyle(document.documentElement);
+    var g = function (n) { return cs.getPropertyValue(n).trim(); };
+    C = { teal: g('--teal'), tealInk: g('--teal-ink'), signal: g('--signal'), ink: g('--ink'), soft: g('--ink-soft'), line: g('--line'), surface: g('--surface'), wash: g('--wash') };
+  }
+  readTheme();
+
+  function dotGrid(ctx, W, H) {
+    ctx.fillStyle = rgba(C.soft, .16);
+    for (var x = 12; x < W; x += 24) for (var y = 12; y < H; y += 24) ctx.fillRect(x - .8, y - .8, 1.6, 1.6);
+  }
+
+  /* ---------- scene runner: draws only while on screen ---------- */
+  var scenes = [];
+  function Scene(canvas, W, H, draw, staticT) {
+    var ctx = canvas.getContext('2d'), scale = 1, raf = 0, t0 = null, last = staticT;
+    function paint(t) { ctx.setTransform(scale, 0, 0, scale, 0, 0); ctx.clearRect(0, 0, W, H); draw(ctx, t); }
+    function size() {
+      var w = canvas.clientWidth || W, dpr = Math.min(2, window.devicePixelRatio || 1);
+      canvas.width = Math.round(w * dpr); canvas.height = Math.round(w * H / W * dpr);
+      scale = canvas.width / W; paint(last);
+    }
+    function frame(now) { if (t0 === null) t0 = now; last = now - t0; paint(last); raf = requestAnimationFrame(frame); }
+    function start() { if (raf || reduce) return; raf = requestAnimationFrame(frame); }
+    function stop() { if (raf) cancelAnimationFrame(raf); raf = 0; }
+    size();
+    if ('ResizeObserver' in window) new ResizeObserver(size).observe(canvas); else window.addEventListener('resize', size);
+    if (!reduce) {
+      if ('IntersectionObserver' in window) {
+        new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) start(); else stop(); }); }, { threshold: .12 }).observe(canvas);
+      } else start();
+    }
+    var api = { repaint: function () { paint(last); } };
+    scenes.push(api);
+    return api;
+  }
+  var onTheme = function () { readTheme(); scenes.forEach(function (s) { s.repaint(); }); };
+  if (window.matchMedia) { var mq = window.matchMedia('(prefers-color-scheme: dark)'); if (mq.addEventListener) mq.addEventListener('change', onTheme); }
+  new MutationObserver(onTheme).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+
+  /* ---------- jointed person, facing right ---------- */
+  function limb(ctx, x, y, a1, l1, a2, l2, foot) {
+    var x1 = x - Math.sin(a1) * l1, y1 = y + Math.cos(a1) * l1, a = a1 + a2;
+    var x2 = x1 - Math.sin(a) * l2, y2 = y1 + Math.cos(a) * l2;
+    ctx.beginPath(); ctx.moveTo(x, y); ctx.lineTo(x1, y1); ctx.lineTo(x2, y2);
+    if (foot) ctx.lineTo(x2 + Math.cos(a) * 9, y2 + Math.sin(a) * 9);
+    ctx.stroke(); return [x2, y2];
+  }
+  function walkPose(o, t) {
+    var ph = t / 850 * 2 * Math.PI, s = Math.sin(ph), c = Math.cos(ph);
+    o.lF = -24 * s; o.lB = 24 * s; o.sF = 6 + 32 * Math.max(0, -c); o.sB = 6 + 32 * Math.max(0, c);
+    o.aF = 20 * s; o.aB = -20 * s; o.fF = -18; o.fB = -18; o.bob = -3 * Math.abs(c); o.lean = 3;
+  }
+  function idlePose(o, t) {
+    var br = Math.sin(t / 900);
+    o.lF = 0; o.lB = 0; o.sF = 0; o.sB = 0; o.aF = -4 * br; o.aB = 4 * br; o.fF = -8; o.fB = -8;
+    o.bob = -0.8 * (1 + Math.sin(t / 700));
+  }
+  function drawPerson(ctx, o) {
+    ctx.save(); ctx.translate(o.x, o.y);
+    ctx.fillStyle = rgba(C.ink, .12); ctx.beginPath(); ctx.ellipse(0, 3, 20, 4, 0, 0, Math.PI * 2); ctx.fill();
+    ctx.scale(o.flip, 1); ctx.translate(0, o.bob); ctx.rotate(o.lean * D);
+    ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+    ctx.globalAlpha = .5;
+    ctx.strokeStyle = C.ink; ctx.lineWidth = 9; limb(ctx, -3, -50, o.lB * D, 24, o.sB * D, 24, true);
+    ctx.strokeStyle = C.tealInk; ctx.lineWidth = 8; limb(ctx, -2, -98, o.aB * D, 21, o.fB * D, 19, false);
+    ctx.globalAlpha = 1;
+    ctx.fillStyle = C.teal; rr(ctx, -16, -106, 32, 60, 14); ctx.fill();
+    ctx.fillStyle = C.ink; ctx.beginPath(); ctx.moveTo(-20, -126); ctx.quadraticCurveTo(-18, -148, 2, -148);
+    ctx.quadraticCurveTo(22, -148, 24, -126); ctx.quadraticCurveTo(16, -136, 2, -136); ctx.quadraticCurveTo(-12, -136, -20, -126); ctx.fill();
+    ctx.fillStyle = C.surface; ctx.strokeStyle = C.ink; ctx.lineWidth = 2; ctx.beginPath(); ctx.arc(2, -124, 16, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
+    ctx.fillStyle = C.ink; ctx.beginPath(); ctx.arc(10, -125, 1.9, 0, Math.PI * 2); ctx.fill();
+    ctx.lineWidth = 1.6; ctx.beginPath(); ctx.moveTo(8, -117); ctx.quadraticCurveTo(12, -114, 15, -118); ctx.stroke();
+    ctx.strokeStyle = C.ink; ctx.lineWidth = 9; limb(ctx, 3, -50, o.lF * D, 24, o.sF * D, 24, true);
+    ctx.strokeStyle = C.tealInk; ctx.lineWidth = 8; var h = limb(ctx, 2, -98, o.aF * D, 21, o.fF * D, 19, false);
+    if (o.card) {
+      ctx.save(); ctx.translate(h[0], h[1]); ctx.rotate((o.aF + o.fF) * D);
+      ctx.fillStyle = C.surface; ctx.strokeStyle = C.signal; ctx.lineWidth = 1.5; rr(ctx, -6, 2, 16, 11, 2); ctx.fill(); ctx.stroke();
+      ctx.fillStyle = C.teal; ctx.fillRect(-3, 5, 7, 2.5); ctx.restore();
+    }
+    ctx.restore();
+    return [o.x + o.flip * h[0], o.y + o.bob + h[1]];
+  }
+
+  /* =========================================================
+     01 RCM: one claim's whole journey, 13 second loop
+     ========================================================= */
+  var rcmSteps = document.querySelectorAll('#rcmSteps li'), rcmIdx = -1;
+  function setStep(i) {
+    if (i === rcmIdx) return; rcmIdx = i;
+    for (var k = 0; k < rcmSteps.length; k++) rcmSteps[k].className = k < i ? 'done' : (k === i ? 'on' : '');
+  }
+  var WIN_ORDER = [7, 1, 12, 4, 9, 0, 14, 6, 3, 11, 2, 13, 5, 10, 8];
+  var P0 = [365, 168], P1 = [540, 0], P2 = [738, 150];
+  function bz(u) { var a = 1 - u; return [a * a * P0[0] + 2 * a * u * P1[0] + u * u * P2[0], a * a * P0[1] + 2 * a * u * P1[1] + u * u * P2[1]]; }
+  function miniCard(ctx, x, y, s, a) {
+    ctx.save(); ctx.globalAlpha = a; ctx.translate(x, y); ctx.scale(s, s);
+    ctx.fillStyle = C.surface; ctx.strokeStyle = C.signal; ctx.lineWidth = 1.5; rr(ctx, -8, -5.5, 16, 11, 2); ctx.fill(); ctx.stroke();
+    ctx.fillStyle = C.teal; ctx.fillRect(-5, -2, 7, 2.5); ctx.restore();
+  }
+  function plane(ctx, x, y, a, s) {
+    ctx.save(); ctx.translate(x, y); ctx.rotate(a); ctx.scale(s, s);
+    ctx.fillStyle = C.surface; ctx.strokeStyle = C.signal; ctx.lineWidth = 2; ctx.lineJoin = 'round';
+    ctx.beginPath(); ctx.moveTo(16, 0); ctx.lineTo(-12, -10); ctx.lineTo(-6, 0); ctx.lineTo(-12, 10); ctx.closePath(); ctx.fill(); ctx.stroke();
+    line(ctx, -6, 0, 16, 0); ctx.restore();
+  }
+  function coin(ctx, x, y) {
+    ctx.fillStyle = C.signal; ctx.beginPath(); ctx.arc(x, y, 7, 0, Math.PI * 2); ctx.fill();
+    ctx.strokeStyle = C.surface; ctx.lineWidth = 1.5; ctx.stroke();
+    txt(ctx, '$', x, y + 3.5, 9, DISP, C.surface, 'center', 800);
+  }
+
+  function drawRCM(ctx, t) {
+    var T = t % 13000;
+    dotGrid(ctx, 900, 360);
+    ctx.save(); ctx.strokeStyle = C.line; ctx.lineWidth = 2; ctx.setLineDash([2, 8]); line(ctx, 10, 300, 890, 300); ctx.restore();
+
+    /* front desk with eligibility monitor */
+    ctx.fillStyle = C.surface; ctx.strokeStyle = C.line; ctx.lineWidth = 2; rr(ctx, 165, 240, 95, 60, 6); ctx.fill(); ctx.stroke();
+    ctx.fillStyle = C.wash; rr(ctx, 165, 240, 95, 9, 4); ctx.fill();
+    ctx.strokeStyle = C.soft; ctx.lineWidth = 3; line(ctx, 213, 240, 213, 228);
+    ctx.fillStyle = C.surface; ctx.strokeStyle = C.soft; ctx.lineWidth = 1.5; rr(ctx, 179, 190, 68, 38, 5); ctx.fill(); ctx.stroke();
+    if (T < 2700) txt(ctx, 'READY', 213, 213, 9, MONO, C.soft, 'center');
+    else if (T < 3500) {
+      txt(ctx, 'VERIFYING', 213, 210, 8, MONO, C.signal, 'center', 600);
+      for (var dd = 0; dd < 3; dd++) { ctx.fillStyle = (Math.floor(T / 180) % 3) === dd ? C.signal : rgba(C.signal, .25); ctx.beginPath(); ctx.arc(205 + dd * 8, 219, 2, 0, Math.PI * 2); ctx.fill(); }
+    } else { check(ctx, 189, 208, C.teal, .8); txt(ctx, 'ELIGIBLE', 196, 212, 8.5, MONO, C.teal, 'left', 600); }
+    txt(ctx, 'FRONT DESK', 213, 322, 10, MONO, C.soft, 'center');
+
+    /* patient */
+    var px = 128, flip = 1, walking = false;
+    if (T < 2400) { px = lerp(-40, 128, T / 2400); walking = true; }
+    else if (T >= 11800) { px = lerp(128, -40, (T - 11800) / 1200); flip = -1; walking = true; }
+    var o = { x: px, y: 300, flip: flip, lean: 0, card: T < 3000 };
+    if (walking) walkPose(o, t);
+    else {
+      idlePose(o, t);
+      var base = o.aF, baseF = o.fF;
+      if (T < 3000) { var k1 = ease(prog(T, 2400, 2900)); o.aF = lerp(base, -72, k1); o.fF = lerp(baseF, -10, k1); }
+      else if (T < 3700) { var k2 = ease(prog(T, 3100, 3700)); o.aF = lerp(-72, base, k2); o.fF = lerp(-10, baseF, k2); }
+      if (T >= 5000 && T < 5700) o.lean = 3 * Math.sin(prog(T, 5000, 5700) * Math.PI);
+      if (T >= 10800 && T < 11700) {
+        var w = Math.min(1, (T - 10800) / 250, (11700 - T) / 250);
+        o.aF = lerp(base, -150, w); o.fF = lerp(baseF, -20 + 28 * Math.sin((T - 10800) / 110), w);
+      }
+    }
+    var hand = drawPerson(ctx, o);
+    txt(ctx, 'PATIENT', px, 326, 10, MONO, C.soft, 'center');
+
+    /* insurance card flies to the eligibility monitor */
+    if (T >= 3000 && T < 3500) {
+      var q = ease(prog(T, 3000, 3450));
+      miniCard(ctx, lerp(hand[0], 213, q), lerp(hand[1], 209, q) - 22 * Math.sin(Math.PI * q), 1 - q * .4, 1 - prog(T, 3400, 3500));
+    }
+
+    /* claim form: coding, then scrubbing */
+    var dx = 300, dy = 86, dw = 130, dh = 164;
+    if (T >= 3500 && T < 7950) {
+      var sc = back(prog(T, 3500, 3850)), fx = 1 - ease(prog(T, 7600, 7950));
+      ctx.save();
+      ctx.translate(dx + dw / 2, dy + dh / 2); ctx.scale(Math.max(.001, sc * fx), Math.max(.001, sc)); ctx.translate(-(dx + dw / 2), -(dy + dh / 2));
+      ctx.shadowColor = rgba(C.ink, .14); ctx.shadowBlur = 18; ctx.shadowOffsetY = 6;
+      ctx.fillStyle = C.surface; rr(ctx, dx, dy, dw, dh, 9); ctx.fill();
+      ctx.shadowColor = 'transparent'; ctx.shadowBlur = 0; ctx.shadowOffsetY = 0;
+      ctx.save(); rr(ctx, dx, dy, dw, dh, 9); ctx.clip(); ctx.fillStyle = C.teal; ctx.fillRect(dx, dy, dw, 24); ctx.restore();
+      ctx.strokeStyle = C.teal; ctx.lineWidth = 2; rr(ctx, dx, dy, dw, dh, 9); ctx.stroke();
+      txt(ctx, 'CLAIM · CMS-1500', dx + 10, dy + 16, 9, MONO, C.surface, 'left', 600);
+      var L = [['ICD-10', 'M17.11', 3900], ['CPT', '97110 ×2', 4400], ['CPT', '97140', 4900], ['CHARGE', '$1,284.00', 5300]];
+      var laserY = dy + 26 + ((T - 5800) % 600) / 600 * (dh - 32);
+      for (var i = 0; i < 4; i++) {
+        var ly = dy + 46 + i * 28, st = L[i][2];
+        if ((T >= 6400 && T < 7000 && laserY > ly + 14) || T >= 7000) { ctx.fillStyle = rgba(C.teal, .13); rr(ctx, dx + 6, ly - 11, dw - 12, 27, 5); ctx.fill(); }
+        if (T >= st - 250) txt(ctx, L[i][0], dx + 12, ly, 8, MONO, C.soft, 'left');
+        var n = clamp(Math.floor((T - st) / 55), 0, L[i][1].length);
+        if (n > 0) txt(ctx, L[i][1].slice(0, n), dx + 12, ly + 13, 11, MONO, C.ink, 'left', 600);
+        if (n === L[i][1].length) check(ctx, dx + dw - 18, ly + 6, C.teal, 1);
+      }
+      if (T >= 5800 && T < 7000) {
+        var g = ctx.createLinearGradient(0, laserY - 26, 0, laserY);
+        g.addColorStop(0, rgba(C.signal, 0)); g.addColorStop(1, rgba(C.signal, .22));
+        ctx.fillStyle = g; ctx.fillRect(dx + 2, laserY - 26, dw - 4, 26);
+        ctx.strokeStyle = C.signal; ctx.lineWidth = 2; ctx.shadowColor = C.signal; ctx.shadowBlur = 10;
+        line(ctx, dx - 10, laserY, dx + dw + 10, laserY); ctx.shadowBlur = 0;
+      }
+      ctx.restore();
+    }
+    if (T >= 7000 && T < 7900) {
+      ctx.globalAlpha = Math.min(1, (T - 7000) / 200, (7900 - T) / 200);
+      pill(ctx, 365, dy + dh + 24, 'CLEAN CLAIM · 0 ERRORS', C.teal, C.surface); ctx.globalAlpha = 1;
+    }
+
+    /* EDI 837: the claim folds into a plane and flies to the payer */
+    if (T >= 8000 && T < 12400) {
+      var u = ease(prog(T, 8000, 9300)), ta = T >= 9300 ? .55 * (1 - prog(T, 12000, 12400)) : 1;
+      ctx.save(); ctx.globalAlpha = ta; ctx.strokeStyle = C.signal; ctx.lineWidth = 2; ctx.setLineDash([5, 7]);
+      ctx.beginPath(); for (var j = 0; j <= 40; j++) { var bp = bz(u * j / 40); if (j) ctx.lineTo(bp[0], bp[1]); else ctx.moveTo(bp[0], bp[1]); } ctx.stroke(); ctx.restore();
+      if (u > .35) { ctx.globalAlpha = ta; txt(ctx, 'EDI 837', 546, 62, 10, MONO, C.signal, 'center', 600); ctx.globalAlpha = 1; }
+    }
+    if (T >= 7800 && T < 9300) {
+      var u2 = ease(prog(T, 8000, 9300)), pp = bz(u2), pn = bz(Math.min(1, u2 + .01));
+      var ang = u2 >= .995 ? .3 : Math.atan2(pn[1] - pp[1], pn[0] - pp[0]);
+      plane(ctx, pp[0], pp[1], ang, back(prog(T, 7800, 8050)) * (1 - prog(T, 9150, 9300)) * 1.3);
+    }
+
+    /* payer building: adjudication lights the windows */
+    var shake = (T >= 10100 && T < 10400) ? Math.sin((T - 10100) / 18) * 3 * (1 - prog(T, 10100, 10400)) : 0;
+    ctx.save(); ctx.translate(shake, 0);
+    ctx.fillStyle = C.surface; ctx.strokeStyle = C.soft; ctx.lineWidth = 2; rr(ctx, 700, 112, 100, 188, 6); ctx.fill(); ctx.stroke();
+    ctx.fillStyle = C.tealInk; rr(ctx, 718, 92, 64, 20, 5); ctx.fill();
+    txt(ctx, 'PAYER', 750, 106, 9, MONO, C.surface, 'center', 600);
+    var lit = T < 9300 ? 0 : (T < 10100 ? Math.floor(prog(T, 9300, 10100) * 15) : 15);
+    for (var r = 0; r < 5; r++) for (var c = 0; c < 3; c++) {
+      var idx = r * 3 + c, on = WIN_ORDER.indexOf(idx) < lit;
+      ctx.fillStyle = on ? (T >= 10100 ? rgba(C.teal, .38) : C.teal) : C.wash;
+      rr(ctx, 713 + c * 28, 126 + r * 28, 18, 16, 3); ctx.fill();
+    }
+    ctx.fillStyle = C.wash; ctx.strokeStyle = C.line; ctx.lineWidth = 1.5; rr(ctx, 738, 268, 24, 32, 3); ctx.fill(); ctx.stroke();
+    ctx.restore();
+    if (T >= 9300 && T < 10100) txt(ctx, 'ADJUDICATING', 750, 322, 10, MONO, C.signal, 'center', 600);
+    else txt(ctx, 'INSURANCE PAYER', 750, 322, 10, MONO, C.soft, 'center');
+
+    if (T >= 10100 && T < 12800) {
+      var ks = back(prog(T, 10100, 10380)), sa = Math.min(1, prog(T, 10100, 10180)) * (1 - prog(T, 12400, 12800));
+      ctx.save(); ctx.globalAlpha = sa; ctx.translate(750, 200); ctx.rotate(-14 * D);
+      var ss = lerp(2.4, 1, ks); ctx.scale(ss, ss);
+      ctx.fillStyle = C.surface; rr(ctx, -60, -20, 120, 40, 6); ctx.fill();
+      ctx.strokeStyle = C.signal; ctx.lineWidth = 3; ctx.stroke();
+      ctx.lineWidth = 1; rr(ctx, -55, -15, 110, 30, 4); ctx.stroke();
+      txt(ctx, 'APPROVED', 0, 7, 19, DISP, C.signal, 'center', 800);
+      ctx.restore();
+    }
+
+    /* ERA 835 and payment posting: coins fill the jar */
+    if (T >= 10300 && T < 12200) { ctx.globalAlpha = Math.min(1, prog(T, 10300, 10500)) * (1 - prog(T, 12000, 12200)); txt(ctx, 'ERA 835', 852, 150, 10, MONO, C.signal, 'center', 600); ctx.globalAlpha = 1; }
+    var landed = 0, flying = [];
+    for (var ci = 0; ci < 10; ci++) {
+      var cs = 10450 + ci * 120, ce = cs + 650;
+      if (T >= ce && T < 12800) landed++;
+      else if (T >= cs && T < ce) { var cq = prog(T, cs, ce); flying.push([lerp(752, 853, cq), lerp(150, 268, cq) - 80 * Math.sin(Math.PI * cq)]); }
+    }
+    ctx.fillStyle = C.surface; ctx.strokeStyle = C.soft; ctx.lineWidth = 2; rr(ctx, 822, 236, 62, 64, 10); ctx.fill(); ctx.stroke();
+    if (landed) {
+      ctx.save(); rr(ctx, 822, 236, 62, 64, 10); ctx.clip();
+      var lv = landed / 10 * 50; ctx.fillStyle = rgba(C.teal, .85); ctx.fillRect(822, 300 - lv, 62, lv);
+      ctx.fillStyle = rgba(C.surface, .35); for (var cl = 0; cl < landed; cl++) ctx.fillRect(826, 296 - cl * 5, 54, 1);
+      ctx.restore();
+    }
+    ctx.fillStyle = C.soft; rr(ctx, 818, 230, 70, 8, 4); ctx.fill();
+    flying.forEach(function (p) { coin(ctx, p[0], p[1]); });
+    if (T >= 10450 && T < 12800) {
+      var amt = Math.round(1284 * prog(T, 10450, 11800));
+      txt(ctx, '$' + amt.toLocaleString('en-US'), 853, 218, 18, DISP, C.signal, 'center', 800);
+    }
+    txt(ctx, 'POSTED', 853, 322, 10, MONO, C.soft, 'center');
+
+    /* HIPAA badge, always on */
+    ctx.save(); ctx.translate(36, 36);
+    ctx.fillStyle = C.surface; ctx.strokeStyle = C.signal; ctx.lineWidth = 2;
+    ctx.beginPath(); ctx.moveTo(0, -14); ctx.lineTo(12, -9); ctx.lineTo(12, 1); ctx.bezierCurveTo(12, 9, 6, 13, 0, 16); ctx.bezierCurveTo(-6, 13, -12, 9, -12, 1); ctx.lineTo(-12, -9); ctx.closePath(); ctx.fill(); ctx.stroke();
+    check(ctx, 0, 0, C.signal, .8); ctx.restore();
+    txt(ctx, 'PHI PROTECTED AT EVERY STAGE', 56, 40, 10, MONO, C.soft, 'left', 500);
+
+    setStep(T < 2400 ? 0 : T < 3500 ? 1 : T < 5800 ? 2 : T < 7800 ? 3 : T < 9300 ? 4 : T < 10100 ? 5 : T < 10450 ? 6 : 7);
+  }
+
+  /* =========================================================
+     02 RPM: home session streams reps to the clinic
+     ========================================================= */
+  var rpm = { lastRep: -1, packets: [], series: [149, 152, 155, 154, 158, 161, 163], flashT: -1e9, goalT: -1e9, reps: 3 };
+  var PEAKS = [158, 163, 166, 169, 171, 167, 172, 170], RP = 2600;
+  function yOf(v) { return 290 - (v - 140) / 40 * 140; }
+  function glowDot(ctx, p, r, col) { ctx.save(); ctx.shadowColor = col; ctx.shadowBlur = 10; ctx.fillStyle = col; ctx.beginPath(); ctx.arc(p[0], p[1], r, 0, Math.PI * 2); ctx.fill(); ctx.restore(); }
+
+  function drawRPM(ctx, t) {
+    dotGrid(ctx, 900, 340);
+    var k = Math.floor(t / RP), f = (t % RP) / RP, peak = PEAKS[k % PEAKS.length];
+    var phi = (peak - 90) * (1 - Math.cos(2 * Math.PI * f)) / 2;
+    if (f >= .5 && rpm.lastRep !== k) { rpm.lastRep = k; rpm.reps++; rpm.packets.push({ t: t, v: peak }); }
+
+    ctx.save(); ctx.strokeStyle = C.line; ctx.lineWidth = 2; ctx.setLineDash([2, 8]); line(ctx, 10, 300, 470, 300); ctx.restore();
+    txt(ctx, 'AT HOME', 24, 34, 10, MONO, C.soft, 'left', 600);
+    txt(ctx, 'REPS', 24, 64, 9, MONO, C.soft);
+    txt(ctx, pad2(((rpm.reps - 1) % 10) + 1) + ' / 10', 24, 92, 24, DISP, C.ink, 'left', 800);
+    ctx.fillStyle = Math.floor(t / 600) % 2 ? C.signal : rgba(C.signal, .3); ctx.beginPath(); ctx.arc(28, 112, 3.5, 0, Math.PI * 2); ctx.fill();
+    txt(ctx, 'SESSION LIVE', 38, 116, 9, MONO, C.signal, 'left', 600);
+
+    /* camera view cone */
+    ctx.fillStyle = rgba(C.teal, .07); ctx.beginPath(); ctx.moveTo(360, 172); ctx.lineTo(112, 96); ctx.lineTo(112, 300); ctx.closePath(); ctx.fill();
+
+    /* chair */
+    ctx.strokeStyle = C.soft; ctx.lineWidth = 4; ctx.lineCap = 'round';
+    line(ctx, 116, 140, 116, 300); line(ctx, 206, 236, 206, 300); line(ctx, 124, 236, 124, 300);
+    ctx.fillStyle = C.soft; rr(ctx, 112, 226, 100, 10, 4); ctx.fill();
+
+    /* seated patient doing knee extensions */
+    var hip = [165, 222], sh = [159, 150], kn = [238, 228];
+    var an = [kn[0] + 72 * Math.sin(phi * D), kn[1] + 72 * Math.cos(phi * D)];
+    var fd = [Math.cos(phi * D), -Math.sin(phi * D)];
+    ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+    ctx.strokeStyle = C.teal; ctx.lineWidth = 30; line(ctx, hip[0], hip[1], sh[0], sh[1]);
+    ctx.fillStyle = C.ink; ctx.beginPath(); ctx.moveTo(141, 120); ctx.quadraticCurveTo(143, 98, 163, 98); ctx.quadraticCurveTo(183, 98, 185, 120); ctx.quadraticCurveTo(177, 110, 163, 110); ctx.quadraticCurveTo(149, 110, 141, 120); ctx.fill();
+    ctx.fillStyle = C.surface; ctx.strokeStyle = C.ink; ctx.lineWidth = 2; ctx.beginPath(); ctx.arc(163, 122, 16, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
+    ctx.fillStyle = C.ink; ctx.beginPath(); ctx.arc(171, 121, 1.9, 0, Math.PI * 2); ctx.fill();
+    ctx.lineWidth = 1.6; ctx.beginPath(); ctx.moveTo(169, 130); ctx.quadraticCurveTo(173, 133, 176, 129); ctx.stroke();
+    ctx.strokeStyle = C.ink; ctx.lineWidth = 13; line(ctx, hip[0], hip[1], kn[0], kn[1]); line(ctx, kn[0], kn[1], an[0], an[1]);
+    ctx.lineWidth = 10; line(ctx, an[0], an[1], an[0] + fd[0] * 14, an[1] + fd[1] * 14);
+    ctx.strokeStyle = C.tealInk; ctx.lineWidth = 8; ctx.beginPath(); ctx.moveTo(sh[0], sh[1]); ctx.lineTo(180, 190); ctx.lineTo(206, 212); ctx.stroke();
+
+    /* tracking overlay */
+    ctx.strokeStyle = rgba(C.signal, .9); ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(hip[0], hip[1]); ctx.lineTo(kn[0], kn[1]); ctx.lineTo(an[0], an[1]); ctx.stroke();
+    arcBetween(ctx, kn, 28, Math.atan2(hip[1] - kn[1], hip[0] - kn[0]), Math.atan2(an[1] - kn[1], an[0] - kn[0]), C.signal, 2.5);
+    glowDot(ctx, hip, 5, C.signal); glowDot(ctx, kn, 5.5, C.signal); glowDot(ctx, an, 5, C.signal);
+    txt(ctx, 'KNEE', 264, 172, 9, MONO, C.soft, 'left', 600);
+    txt(ctx, Math.round(90 + phi) + '°', 262, 198, 26, DISP, C.signal, 'left', 800);
+
+    /* phone on a tripod */
+    ctx.strokeStyle = C.soft; ctx.lineWidth = 2.5; line(ctx, 370, 212, 350, 300); line(ctx, 370, 212, 390, 300); line(ctx, 370, 212, 370, 300);
+    ctx.fillStyle = C.ink; rr(ctx, 356, 158, 28, 54, 6); ctx.fill();
+    ctx.fillStyle = C.tealInk; rr(ctx, 359, 164, 22, 42, 3); ctx.fill();
+    ctx.fillStyle = C.surface; ctx.beginPath(); ctx.arc(363, 171, 3, 0, Math.PI * 2); ctx.fill();
+    ctx.fillStyle = Math.floor(t / 500) % 2 ? C.signal : rgba(C.signal, .3); ctx.beginPath(); ctx.arc(377, 171, 2.6, 0, Math.PI * 2); ctx.fill();
+    txt(ctx, 'PHONE CAMERA', 370, 322, 10, MONO, C.soft, 'center');
+
+    /* upload route */
+    ctx.save(); ctx.strokeStyle = rgba(C.teal, .35); ctx.lineWidth = 1.5; ctx.setLineDash([3, 7]);
+    ctx.beginPath(); ctx.moveTo(370, 158); ctx.quadraticCurveTo(460, 0, 850, yOf(165)); ctx.stroke(); ctx.restore();
+
+    /* clinician dashboard */
+    ctx.fillStyle = C.surface; ctx.strokeStyle = C.line; ctx.lineWidth = 1.5; rr(ctx, 500, 30, 380, 290, 14); ctx.fill(); ctx.stroke();
+    txt(ctx, 'CLINICIAN DASHBOARD', 522, 58, 10, MONO, C.soft, 'left', 600);
+    ctx.fillStyle = Math.floor(t / 600) % 2 ? C.signal : rgba(C.signal, .3); ctx.beginPath(); ctx.arc(826, 54, 3.5, 0, Math.PI * 2); ctx.fill();
+    txt(ctx, 'LIVE', 858, 58, 10, MONO, C.signal, 'right', 600);
+    txt(ctx, 'Knee rehab · remote session', 522, 82, 14, BODY, C.ink, 'left', 600);
+    var s = rpm.series, latest = s[s.length - 1];
+    txt(ctx, latest + '°', 522, 124, 32, DISP, C.ink, 'left', 800);
+    txt(ctx, 'LATEST PEAK EXTENSION', 522, 142, 9, MONO, C.soft);
+    pill(ctx, 812, 116, 'TARGET 170°', C.signal, C.surface);
+    var x0 = 556, x1 = 850, step = (x1 - x0) / 7;
+    [150, 160, 170, 180].forEach(function (v) {
+      var y = yOf(v); ctx.save();
+      if (v === 170) { ctx.setLineDash([4, 5]); ctx.strokeStyle = rgba(C.signal, .7); } else ctx.strokeStyle = C.line;
+      ctx.lineWidth = 1; line(ctx, x0, y, x1, y); ctx.restore();
+      txt(ctx, v + '°', x0 - 8, y + 3, 9, MONO, C.soft, 'right');
+    });
+    var pts = s.map(function (v, i) { return [x1 - (s.length - 1 - i) * step, yOf(v)]; });
+    var gr = ctx.createLinearGradient(0, 150, 0, 290); gr.addColorStop(0, rgba(C.teal, .22)); gr.addColorStop(1, rgba(C.teal, 0));
+    ctx.fillStyle = gr; ctx.beginPath(); ctx.moveTo(pts[0][0], 290); pts.forEach(function (p) { ctx.lineTo(p[0], p[1]); }); ctx.lineTo(pts[pts.length - 1][0], 290); ctx.closePath(); ctx.fill();
+    ctx.strokeStyle = C.teal; ctx.lineWidth = 2.5; ctx.beginPath(); pts.forEach(function (p, i) { if (i) ctx.lineTo(p[0], p[1]); else ctx.moveTo(p[0], p[1]); }); ctx.stroke();
+    pts.forEach(function (p, i) {
+      var lastP = i === pts.length - 1;
+      ctx.fillStyle = C.surface; ctx.strokeStyle = lastP ? C.signal : C.teal; ctx.lineWidth = 2.5;
+      ctx.beginPath(); ctx.arc(p[0], p[1], lastP ? 5 : 4, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
+    });
+    var lp = pts[pts.length - 1], fq = (t - rpm.flashT) / 700;
+    if (fq >= 0 && fq < 1) { ctx.strokeStyle = rgba(C.signal, 1 - fq); ctx.lineWidth = 2; ctx.beginPath(); ctx.arc(lp[0], lp[1], 6 + 16 * fq, 0, Math.PI * 2); ctx.stroke(); }
+    if (t - rpm.goalT < 1600 && t >= rpm.goalT) pill(ctx, lp[0] - 44, lp[1] - 22, 'GOAL MET', C.signal, C.surface);
+    txt(ctx, 'LAST 8 REPS', x0, 308, 9, MONO, C.soft);
+
+    /* data packets in flight */
+    for (var i = rpm.packets.length - 1; i >= 0; i--) {
+      var pk = rpm.packets[i], q = (t - pk.t) / 1100;
+      if (q >= 1) {
+        rpm.series.push(pk.v); if (rpm.series.length > 8) rpm.series.shift();
+        rpm.flashT = t; if (pk.v >= 170) rpm.goalT = t; rpm.packets.splice(i, 1); continue;
+      }
+      if (q < 0) continue;
+      var tgt = [x1, yOf(pk.v)];
+      var at = function (e) { var a = 1 - e; return [a * a * 370 + 2 * a * e * 460 + e * e * tgt[0], a * a * 158 + e * e * tgt[1]]; };
+      var e = ease(q);
+      for (var tr = 1; tr <= 5; tr++) { var tp = at(Math.max(0, e - tr * .025)); ctx.fillStyle = rgba(C.signal, .35 - tr * .06); ctx.beginPath(); ctx.arc(tp[0], tp[1], 4 - tr * .5, 0, Math.PI * 2); ctx.fill(); }
+      var pp = at(e);
+      ctx.save(); ctx.shadowColor = rgba(C.signal, .5); ctx.shadowBlur = 12; ctx.fillStyle = C.signal; rr(ctx, pp[0] - 23, pp[1] - 11, 46, 22, 11); ctx.fill(); ctx.restore();
+      txt(ctx, pk.v + '°', pp[0], pp[1] + 4, 11, MONO, '#FFFFFF', 'center', 600);
+    }
+  }
+
+  /* =========================================================
+     03 HOLISTIC: viewfinder with pose, hands and face mesh
+     ========================================================= */
+  var HC = { bg: '#061219', teal: '#4CC3D1', sig: '#FF8A5B', text: '#E6F0F2', dim: 'rgba(159,180,188,.75)', faint: 'rgba(159,180,188,.3)' };
+  var layers = { pose: true, hands: true, face: true };
+  var hol = { reps: 6, down: true, trL: [], trR: [], lastT: -1 };
+  var MESH = (function () {
+    var pts = [], rings = [.28, .52, .76, 1], counts = [8, 14, 20, 26], start = [];
+    for (var r = 0; r < 4; r++) { start.push(pts.length); for (var i = 0; i < counts[r]; i++) { var a = i / counts[r] * Math.PI * 2 + r * .3; pts.push([Math.cos(a) * rings[r], Math.sin(a) * rings[r] * 1.25]); } }
+    return { pts: pts, counts: counts, start: start };
+  })();
+  function knee(h, a, side) {
+    var mx = (h[0] + a[0]) / 2, my = (h[1] + a[1]) / 2, d = Math.hypot(a[0] - h[0], a[1] - h[1]);
+    return [mx + side * Math.sqrt(Math.max(0, 79 * 79 - d * d / 4)) * .45, my];
+  }
+  function handPts(w, e, side, t) {
+    var ux = w[0] - e[0], uy = w[1] - e[1], l = Math.hypot(ux, uy) || 1; ux /= l; uy /= l;
+    var px = -uy * side, py = ux * side, pts = [w], spread = .08 * Math.sin(t / 500);
+    var F = [[-6, -.9, [7, 5, 4, 4]], [-5, -.22, [14, 6, 5, 4]], [-1.5, -.04, [15, 6, 5, 4]], [2, .12, [14, 6, 5, 4]], [5, .3, [12, 5, 4, 3]]];
+    F.forEach(function (f, fi) {
+      var an = (f[1] + spread * (fi - 2)) * side, c = Math.cos(an), s = Math.sin(an);
+      var dx = ux * c - uy * s, dy = ux * s + uy * c;
+      var x = w[0] + px * f[0], y = w[1] + py * f[0];
+      f[2].forEach(function (len) { x += dx * len; y += dy * len; pts.push([x, y]); });
+    });
+    return pts;
+  }
+  var HAND_LINKS = [[0, 1, 2, 3, 4], [0, 5, 6, 7, 8], [9, 10, 11, 12], [13, 14, 15, 16], [0, 17, 18, 19, 20], [5, 9, 13, 17]];
+  function corners(ctx, x, y, w, h, len, col, lw) {
+    ctx.strokeStyle = col; ctx.lineWidth = lw || 2; ctx.beginPath();
+    ctx.moveTo(x, y + len); ctx.lineTo(x, y); ctx.lineTo(x + len, y);
+    ctx.moveTo(x + w - len, y); ctx.lineTo(x + w, y); ctx.lineTo(x + w, y + len);
+    ctx.moveTo(x + w, y + h - len); ctx.lineTo(x + w, y + h); ctx.lineTo(x + w - len, y + h);
+    ctx.moveTo(x + len, y + h); ctx.lineTo(x, y + h); ctx.lineTo(x, y + h - len); ctx.stroke();
+  }
+
+  function drawHol(ctx, t) {
+    var W = 900, H = 420;
+    ctx.fillStyle = HC.bg; ctx.fillRect(0, 0, W, H);
+    ctx.strokeStyle = 'rgba(76,195,209,.05)'; ctx.lineWidth = 1;
+    for (var gx = 30; gx < 580; gx += 30) line(ctx, gx, 16, gx, 404);
+    for (var gy = 30; gy < 404; gy += 30) line(ctx, 16, gy, 574, gy);
+
+    /* motion model: overhead squat */
+    var s = (1 - Math.cos(2 * Math.PI * t / 3200)) / 2, cx = 290 + 4 * Math.sin(t / 1300);
+    var hipY = 196 + 58 * s, shY = hipY - 100 + 8 * s, a = lerp(14, 166, s) * D, b = a + 12 * D;
+    var P = {};
+    P.ankL = [cx - 42, 352]; P.ankR = [cx + 42, 352]; P.heelL = [cx - 36, 362]; P.heelR = [cx + 36, 362]; P.toeL = [cx - 62, 364]; P.toeR = [cx + 62, 364];
+    P.hipL = [cx - 27, hipY]; P.hipR = [cx + 27, hipY]; P.kneeL = knee(P.hipL, P.ankL, -1); P.kneeR = knee(P.hipR, P.ankR, 1);
+    P.shL = [cx - 47, shY]; P.shR = [cx + 47, shY];
+    P.elbL = [P.shL[0] - 58 * Math.sin(a), P.shL[1] + 58 * Math.cos(a)]; P.elbR = [P.shR[0] + 58 * Math.sin(a), P.shR[1] + 58 * Math.cos(a)];
+    P.wrL = [P.elbL[0] - 54 * Math.sin(b), P.elbL[1] + 54 * Math.cos(b)]; P.wrR = [P.elbR[0] + 54 * Math.sin(b), P.elbR[1] + 54 * Math.cos(b)];
+    var fc = [cx, shY - 52];
+    P.nose = [cx, shY - 50]; P.eyeL = [cx - 9, shY - 58]; P.eyeR = [cx + 9, shY - 58]; P.earL = [cx - 21, shY - 54]; P.earR = [cx + 21, shY - 54]; P.mouL = [cx - 7, shY - 40]; P.mouR = [cx + 7, shY - 40];
+
+    var FS = .86; Object.keys(P).forEach(function (k) { P[k] = [cx + (P[k][0] - cx) * FS, 364 - (364 - P[k][1]) * FS]; }); fc = [cx, 364 - (364 - fc[1]) * FS];
+    var kA = angAt(P.hipL, P.kneeL, P.ankL), hA = angAt(P.shR, P.hipR, P.kneeR), sA = angAt(P.hipL, P.shL, P.elbL);
+    if (s > .95 && !hol.down) { hol.down = true; hol.reps++; }
+    if (s < .3) hol.down = false;
+    if (t !== hol.lastT) { hol.lastT = t; hol.trL.push(P.wrL.slice()); hol.trR.push(P.wrR.slice()); if (hol.trL.length > 22) { hol.trL.shift(); hol.trR.shift(); } }
+
+    /* faint silhouette under the tracking */
+    ctx.save(); ctx.lineCap = 'round'; ctx.lineJoin = 'round'; ctx.strokeStyle = 'rgba(230,240,242,.07)'; ctx.fillStyle = 'rgba(230,240,242,.07)';
+    ctx.beginPath(); ctx.moveTo(P.shL[0], P.shL[1]); ctx.lineTo(P.shR[0], P.shR[1]); ctx.lineTo(P.hipR[0], P.hipR[1]); ctx.lineTo(P.hipL[0], P.hipL[1]); ctx.closePath(); ctx.fill();
+    ctx.lineWidth = 24; [['hipL', 'kneeL', 'ankL'], ['hipR', 'kneeR', 'ankR']].forEach(function (c) { ctx.beginPath(); ctx.moveTo(P[c[0]][0], P[c[0]][1]); ctx.lineTo(P[c[1]][0], P[c[1]][1]); ctx.lineTo(P[c[2]][0], P[c[2]][1]); ctx.stroke(); });
+    ctx.lineWidth = 18; [['shL', 'elbL', 'wrL'], ['shR', 'elbR', 'wrR']].forEach(function (c) { ctx.beginPath(); ctx.moveTo(P[c[0]][0], P[c[0]][1]); ctx.lineTo(P[c[1]][0], P[c[1]][1]); ctx.lineTo(P[c[2]][0], P[c[2]][1]); ctx.stroke(); });
+    ctx.beginPath(); ctx.arc(fc[0], fc[1], 25, 0, Math.PI * 2); ctx.fill(); ctx.restore();
+
+    /* scan line */
+    var sy = 16 + ((t / 2600) % 1) * 388, sg = ctx.createLinearGradient(0, sy - 50, 0, sy);
+    sg.addColorStop(0, 'rgba(76,195,209,0)'); sg.addColorStop(1, 'rgba(76,195,209,.13)');
+    ctx.fillStyle = sg; ctx.fillRect(16, sy - 50, 558, 50); ctx.strokeStyle = 'rgba(76,195,209,.5)'; ctx.lineWidth = 1; line(ctx, 16, sy, 574, sy);
+
+    /* face mesh */
+    if (layers.face) {
+      var mp = MESH.pts.map(function (p, i) { return [fc[0] + p[0] * 22 + Math.sin(t / 380 + i) * .4, fc[1] + p[1] * 22 + Math.cos(t / 420 + i) * .4]; });
+      ctx.strokeStyle = 'rgba(76,195,209,.22)'; ctx.lineWidth = .8;
+      for (var r = 0; r < 4; r++) {
+        var st = MESH.start[r], n = MESH.counts[r];
+        ctx.beginPath(); for (var i = 0; i <= n; i++) { var q = mp[st + (i % n)]; if (i) ctx.lineTo(q[0], q[1]); else ctx.moveTo(q[0], q[1]); } ctx.stroke();
+        if (r < 3) { var st2 = MESH.start[r + 1], n2 = MESH.counts[r + 1]; for (var j = 0; j < n; j++) { var jj = Math.round(j * n2 / n) % n2; line(ctx, mp[st + j][0], mp[st + j][1], mp[st2 + jj][0], mp[st2 + jj][1]); } }
+      }
+      ctx.fillStyle = 'rgba(76,195,209,.85)'; mp.forEach(function (q) { ctx.beginPath(); ctx.arc(q[0], q[1], 1.1, 0, Math.PI * 2); ctx.fill(); });
+      ctx.strokeStyle = HC.teal; ctx.lineWidth = 1.2;
+      [P.eyeL, P.eyeR].forEach(function (e) { ctx.beginPath(); ctx.ellipse(e[0], e[1] + 2, 5, 2.6, 0, 0, Math.PI * 2); ctx.stroke(); });
+      ctx.beginPath(); ctx.moveTo(P.mouL[0], P.mouL[1]); ctx.quadraticCurveTo(cx, P.mouL[1] + 4, P.mouR[0], P.mouR[1]); ctx.quadraticCurveTo(cx, P.mouL[1] - 1, P.mouL[0], P.mouL[1]); ctx.stroke();
+    }
+
+    /* wrist trails */
+    if (layers.pose || layers.hands) {
+      [hol.trL, hol.trR].forEach(function (tr) { tr.forEach(function (p, i) { ctx.fillStyle = 'rgba(255,138,91,' + (i / tr.length * .5).toFixed(2) + ')'; ctx.beginPath(); ctx.arc(p[0], p[1], 1 + i / tr.length * 2.5, 0, Math.PI * 2); ctx.fill(); }); });
+    }
+
+    /* pose */
+    if (layers.pose) {
+      var LINKS = [['shL', 'shR'], ['shL', 'elbL'], ['elbL', 'wrL'], ['shR', 'elbR'], ['elbR', 'wrR'], ['shL', 'hipL'], ['shR', 'hipR'], ['hipL', 'hipR'], ['hipL', 'kneeL'], ['kneeL', 'ankL'], ['hipR', 'kneeR'], ['kneeR', 'ankR'], ['ankL', 'heelL'], ['heelL', 'toeL'], ['toeL', 'ankL'], ['ankR', 'heelR'], ['heelR', 'toeR'], ['toeR', 'ankR'], ['nose', 'eyeL'], ['eyeL', 'earL'], ['nose', 'eyeR'], ['eyeR', 'earR'], ['mouL', 'mouR']];
+      var side = function (k) { return /L$/.test(k) ? HC.sig : (/R$/.test(k) ? HC.teal : HC.text); };
+      ctx.save(); ctx.lineCap = 'round'; ctx.lineWidth = 3; ctx.shadowBlur = 8;
+      LINKS.forEach(function (l) {
+        var col = (/L$/.test(l[0]) && /L$/.test(l[1])) ? HC.sig : ((/R$/.test(l[0]) && /R$/.test(l[1])) ? HC.teal : HC.text);
+        ctx.strokeStyle = col; ctx.shadowColor = col; line(ctx, P[l[0]][0], P[l[0]][1], P[l[1]][0], P[l[1]][1]);
       });
-    }, { threshold: 0.4 });
-    obs.observe(factsEl);
+      Object.keys(P).forEach(function (k) {
+        var col = side(k); ctx.shadowColor = col; ctx.fillStyle = HC.bg; ctx.strokeStyle = col; ctx.lineWidth = 2.2;
+        ctx.beginPath(); ctx.arc(P[k][0], P[k][1], 4, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
+      });
+      ctx.restore();
+      arcBetween(ctx, P.kneeL, 22, Math.atan2(P.hipL[1] - P.kneeL[1], P.hipL[0] - P.kneeL[0]), Math.atan2(P.ankL[1] - P.kneeL[1], P.ankL[0] - P.kneeL[0]), HC.sig, 2.5);
+      arcBetween(ctx, P.shL, 22, Math.atan2(P.hipL[1] - P.shL[1], P.hipL[0] - P.shL[0]), Math.atan2(P.elbL[1] - P.shL[1], P.elbL[0] - P.shL[0]), HC.sig, 2.5);
+      arcBetween(ctx, P.hipR, 22, Math.atan2(P.shR[1] - P.hipR[1], P.shR[0] - P.hipR[0]), Math.atan2(P.kneeR[1] - P.hipR[1], P.kneeR[0] - P.hipR[0]), HC.teal, 2.5);
+      txt(ctx, Math.round(kA) + '°', P.kneeL[0] - 30, P.kneeL[1] + 5, 15, DISP, HC.sig, 'right', 800);
+      txt(ctx, Math.round(sA) + '°', P.shL[0] - 32, P.shL[1] + 14, 15, DISP, HC.sig, 'right', 800);
+      txt(ctx, Math.round(hA) + '°', P.hipR[0] + 32, P.hipR[1] + 5, 15, DISP, HC.teal, 'left', 800);
+    }
+
+    /* hands */
+    if (layers.hands) {
+      [[P.wrL, P.elbL, -1], [P.wrR, P.elbR, 1]].forEach(function (hh) {
+        var hp = handPts(hh[0], hh[1], hh[2], t);
+        ctx.strokeStyle = 'rgba(230,240,242,.85)'; ctx.lineWidth = 1.4; ctx.lineCap = 'round';
+        HAND_LINKS.forEach(function (ch) { ctx.beginPath(); ch.forEach(function (ix, i) { if (i) ctx.lineTo(hp[ix][0], hp[ix][1]); else ctx.moveTo(hp[ix][0], hp[ix][1]); }); ctx.stroke(); });
+        ctx.fillStyle = HC.teal; hp.forEach(function (p) { ctx.beginPath(); ctx.arc(p[0], p[1], 1.9, 0, Math.PI * 2); ctx.fill(); });
+      });
+    }
+
+    /* tracking box */
+    var xs = [], ys = []; Object.keys(P).forEach(function (k) { xs.push(P[k][0]); ys.push(P[k][1]); });
+    ys.push(fc[1] - 30);
+    var bx = Math.min.apply(null, xs) - 18, by = Math.min.apply(null, ys) - 14, bw = Math.max.apply(null, xs) + 18 - bx, bh = Math.max.apply(null, ys) + 12 - by;
+    corners(ctx, bx, by, bw, bh, 14, 'rgba(76,195,209,.8)', 2);
+    txt(ctx, 'PERSON 0.98', bx + 4, by + bh + 16, 10, MONO, HC.teal, 'left', 600);
+
+    /* viewfinder HUD */
+    corners(ctx, 16, 16, 558, 388, 22, 'rgba(230,240,242,.5)', 2);
+    ctx.fillStyle = Math.floor(t / 600) % 2 ? HC.sig : 'rgba(255,138,91,.35)'; ctx.beginPath(); ctx.arc(38, 40, 4.5, 0, Math.PI * 2); ctx.fill();
+    txt(ctx, 'REC  30 FPS', 50, 44, 10, MONO, HC.text, 'left', 600);
+    txt(ctx, 'MEDIAPIPE HOLISTIC', 34, 62, 9, MONO, HC.dim);
+    txt(ctx, (layers.pose ? 33 : 0) + (layers.hands ? 42 : 0) + (layers.face ? 468 : 0) + ' LANDMARKS', 556, 44, 10, MONO, HC.text, 'right', 600);
+
+    /* analysis panel */
+    ctx.fillStyle = 'rgba(255,255,255,.035)'; ctx.strokeStyle = 'rgba(76,195,209,.22)'; ctx.lineWidth = 1.2; rr(ctx, 590, 16, 294, 388, 14); ctx.fill(); ctx.stroke();
+    txt(ctx, 'LIVE ANALYSIS', 610, 46, 10, MONO, HC.dim, 'left', 600);
+    [[kA, 'KNEE', HC.sig, 645], [hA, 'HIP', HC.teal, 737], [sA, 'SHOULDER', HC.sig, 829]].forEach(function (g) {
+      var gx2 = g[3], gy2 = 106;
+      ctx.lineWidth = 6; ctx.lineCap = 'round'; ctx.strokeStyle = 'rgba(255,255,255,.08)'; ctx.beginPath(); ctx.arc(gx2, gy2, 30, 0, Math.PI * 2); ctx.stroke();
+      ctx.strokeStyle = g[2]; ctx.beginPath(); ctx.arc(gx2, gy2, 30, -Math.PI / 2, -Math.PI / 2 + clamp(g[0] / 180, 0, 1) * Math.PI * 2); ctx.stroke();
+      txt(ctx, Math.round(g[0]) + '°', gx2, gy2 + 6, 16, DISP, HC.text, 'center', 800);
+      txt(ctx, g[1], gx2, gy2 + 52, 9, MONO, HC.dim, 'center', 600);
+    });
+    txt(ctx, 'REPS', 610, 194, 9, MONO, HC.dim, 'left', 600);
+    txt(ctx, pad2(hol.reps), 608, 236, 42, DISP, HC.text, 'left', 800);
+    txt(ctx, 'OVERHEAD SQUAT', 610, 256, 9, MONO, HC.dim);
+    ctx.fillStyle = 'rgba(255,255,255,.07)'; rr(ctx, 836, 180, 18, 76, 9); ctx.fill();
+    ctx.save(); rr(ctx, 836, 180, 18, 76, 9); ctx.clip(); ctx.fillStyle = s > .8 ? HC.sig : HC.teal; ctx.fillRect(836, 256 - 76 * s, 18, 76 * s); ctx.restore();
+    txt(ctx, 'DEPTH', 845, 272, 9, MONO, HC.dim, 'center', 600);
+    var checks = [['Squat depth reached', s > .8], ['Arms fully overhead', sA > 150], ['Knees track over toes', true], ['Weight balanced', true]];
+    checks.forEach(function (c, i) {
+      var cy2 = 306 + i * 24;
+      if (c[1]) { ctx.fillStyle = HC.teal; ctx.beginPath(); ctx.arc(618, cy2 - 4, 7.5, 0, Math.PI * 2); ctx.fill(); check(ctx, 618, cy2 - 4, HC.bg, .8); }
+      else { ctx.strokeStyle = HC.faint; ctx.lineWidth = 1.5; ctx.beginPath(); ctx.arc(618, cy2 - 4, 7, 0, Math.PI * 2); ctx.stroke(); }
+      txt(ctx, c[0], 634, cy2, 13, BODY, c[1] ? HC.text : HC.dim, 'left', 500);
+    });
+  }
+
+  /* ---------- start the scenes ---------- */
+  var rcmC = document.getElementById('rcmCanvas'), rpmC = document.getElementById('rpmCanvas'), holC = document.getElementById('holCanvas');
+  if (rcmC && rcmC.getContext) Scene(rcmC, 900, 360, drawRCM, 11500);
+  if (rpmC && rpmC.getContext) Scene(rpmC, 900, 340, drawRPM, RP * 3 + RP * .5);
+  var holScene = (holC && holC.getContext) ? Scene(holC, 900, 420, drawHol, 1600) : null;
+  document.querySelectorAll('.layers button').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var k = btn.getAttribute('data-layer'); layers[k] = !layers[k];
+      btn.setAttribute('aria-pressed', layers[k] ? 'true' : 'false');
+      if (holScene) holScene.repaint();
+    });
+  });
+
+  /* ---------- page bits ---------- */
+  document.querySelectorAll('.copy').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var el = document.getElementById(btn.getAttribute('data-copy'));
+      var text = el ? el.textContent.trim() : '';
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(function () { btn.textContent = 'Copied'; setTimeout(function () { btn.textContent = 'Copy'; }, 1600); }, function () {});
+      }
+    });
+  });
+  var rot = document.getElementById('rot');
+  if (rot && !reduce) {
+    var words = ['healthcare', 'telehealth', 'claims', 'field-safety'], wi = 0;
+    setInterval(function () {
+      wi = (wi + 1) % words.length; rot.style.transition = 'opacity .3s ease'; rot.style.opacity = '0';
+      setTimeout(function () { rot.textContent = words[wi]; rot.style.opacity = '1'; }, 300);
+    }, 2600);
   }
 })();
 </script>
+</body>
+</html>
