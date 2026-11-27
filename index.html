@@ -8,6 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Source+Sans+3:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap">
+<script>document.documentElement.classList.add('anim');setTimeout(function(){document.documentElement.classList.remove('anim')},3000);</script>
 <style>
 /* Layout: a clinical chart. Left rail of labels, content right. Each showcase is a live canvas scene. */
 :root{color-scheme:light;--bg:#F4F8F8;--surface:#FFFFFF;--ink:#0B1F2A;--ink-soft:#4B5F6B;--line:#D4E0E2;--teal:#0B7A87;--teal-ink:#064E57;--signal:#D9480F;--wash:#E3F0F1;--on-teal:#FFFFFF;--display:'Bricolage Grotesque','Segoe UI',system-ui,sans-serif;--body:'Source Sans 3','Segoe UI',system-ui,sans-serif;--mono:'JetBrains Mono',ui-monospace,'SFMono-Regular',Menlo,monospace;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
@@ -152,6 +153,38 @@ footer{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 20px;ma
   @keyframes cloudPulse{0%,40%{opacity:.5}45%,75%{opacity:1}80%,100%{opacity:.5}}
 }
 
+/* ---------- motion layer (GSAP) ---------- */
+.progress{position:fixed;inset:0 0 auto 0;height:3px;background:linear-gradient(90deg,var(--teal),var(--signal));transform:scaleX(0);transform-origin:0 50%;z-index:60;pointer-events:none}
+.nav{position:sticky;top:0;z-index:50;background:var(--bg);box-shadow:0 0 0 100vmax var(--bg);clip-path:inset(0 -100vmax -1px);will-change:transform}
+html{scroll-padding-top:84px}
+.nav ul a{position:relative;transition:color .25s ease}
+.nav ul a::after{content:"";position:absolute;left:0;right:0;bottom:-5px;height:2px;background:var(--signal);transform:scaleX(0);transform-origin:100% 50%;transition:transform .35s cubic-bezier(.2,.8,.2,1)}
+.nav ul a:hover::after,.nav ul a.active::after{transform:scaleX(1);transform-origin:0 50%}
+.nav ul a.active{color:var(--ink)}
+.hero{position:relative;isolation:isolate}
+.hero::before{content:"";position:absolute;inset:-40px 0;z-index:-1;pointer-events:none;background:radial-gradient(520px circle at calc(var(--mx,70) * 1%) calc(var(--my,40) * 1%),rgba(11,122,135,.13),transparent 60%);opacity:var(--glow,0);transition:opacity .6s ease}
+.btn{transition:background-color .25s ease,color .25s ease,border-color .25s ease,box-shadow .25s ease}
+.btn.primary:hover{box-shadow:0 10px 24px -10px rgba(217,72,15,.6)}
+.index a{transition:background-color .25s ease}
+.index a b,.index a .n{display:inline-block;transition:transform .35s cubic-bezier(.2,.8,.2,1),color .25s ease}
+.index a:hover b{transform:translateX(6px);color:var(--teal-ink)}
+.index a:hover .n{transform:translateX(3px)}
+.case{transition:border-color .3s ease,box-shadow .3s ease}
+.case:hover{border-color:var(--teal);box-shadow:0 22px 48px -28px rgba(11,31,42,.35)}
+.chips li{transition:background-color .2s ease,color .2s ease}
+.chips li:hover{background:var(--teal);color:var(--on-teal)}
+.skills>div{border-top:2px solid var(--line);padding-top:14px;position:relative}
+.skills>div::before{content:"";position:absolute;left:0;top:-2px;height:2px;width:100%;background:var(--teal);transform:scaleX(var(--sx,0));transform-origin:0 50%}
+.xp{position:relative;padding-left:30px}
+.xp-track,.xp-fill{position:absolute;left:5px;top:6px;bottom:6px;width:2px;border-radius:2px;background:var(--line)}
+.xp-fill{background:linear-gradient(var(--teal),var(--signal));transform:scaleY(0);transform-origin:50% 0}
+.xp .job{position:relative}
+.xp .job::before{content:"";position:absolute;left:-30px;top:6px;width:12px;height:12px;border-radius:50%;background:var(--bg);border:2px solid var(--teal)}
+@media (min-width:921px){.rail{position:sticky;top:96px;align-self:start}}
+html.gsap h1,html.gsap h2{text-wrap:wrap}
+@media (prefers-reduced-motion:no-preference){html.anim .hero,html.anim .facts{visibility:hidden}}
+@media (prefers-reduced-motion:reduce){.nav ul a::after,.index a b,.index a .n{transition:none}}
+
 @media (max-width:920px){
   .hero{grid-template-columns:minmax(0,1fr)}
   section.block{grid-template-columns:minmax(0,1fr);gap:8px}
@@ -170,6 +203,7 @@ footer{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 20px;ma
 </style>
 </head>
 <body>
+<div class="progress" aria-hidden="true"></div>
 <div class="shell">
 
 <header class="nav">
@@ -303,6 +337,8 @@ footer{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 20px;ma
   <div class="rail">Experience</div>
   <div>
     <h2>Where I have done the work.</h2>
+    <div class="xp">
+    <span class="xp-track" aria-hidden="true"></span><span class="xp-fill" aria-hidden="true"></span>
     <div class="job">
       <div class="when">Mar 2022 &ndash; Present</div>
       <h3>Senior Frontend Team Lead &mdash; Ditstek Innovations</h3>
@@ -323,6 +359,7 @@ footer{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 20px;ma
         <li>Built AI-assisted health-monitoring dashboards with Angular and TensorFlow.js.</li>
         <li>Delivered responsive safety-compliance tools used by 3 industrial clients in South Africa and Nigeria.</li>
       </ul>
+    </div>
     </div>
   </div>
 </section>
@@ -980,13 +1017,223 @@ footer{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 20px;ma
     });
   });
   var rot = document.getElementById('rot');
-  if (rot && !reduce) {
+  /* plain fallback rotator, only when the GSAP motion layer did not load */
+  document.addEventListener('DOMContentLoaded', function () {
+    if (!rot || reduce || window.gsap) return;
     var words = ['healthcare', 'telehealth', 'claims', 'field-safety'], wi = 0;
     setInterval(function () {
       wi = (wi + 1) % words.length; rot.style.transition = 'opacity .3s ease'; rot.style.opacity = '0';
       setTimeout(function () { rot.textContent = words[wi]; rot.style.opacity = '1'; }, 300);
     }, 2600);
-  }
+  });
+})();
+</script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollToPlugin.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js"></script>
+<script>
+/* Motion layer: GSAP + ScrollTrigger + SplitText. Everything lives inside matchMedia so
+   reduced-motion users get the static page, and all of it reverts cleanly. */
+(function () {
+  var root = document.documentElement;
+  function ready() { root.classList.remove('anim'); }
+  if (!window.gsap || !window.ScrollTrigger) { ready(); return; }
+  gsap.registerPlugin(ScrollTrigger, ScrollToPlugin, SplitText);
+  root.classList.add('gsap');
+
+  var $ = function (s, c) { return (c || document).querySelector(s); };
+  var $$ = function (s, c) { return gsap.utils.toArray(s, c); };
+  var canHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  var mm = gsap.matchMedia();
+
+  mm.add('(prefers-reduced-motion: reduce)', function () { ready(); });
+
+  mm.add('(prefers-reduced-motion: no-preference)', function () {
+    gsap.defaults({ ease: 'power3.out', duration: .9 });
+    root.style.scrollBehavior = 'auto';
+
+    /* ---------- scroll progress + smart sticky nav ---------- */
+    gsap.to('.progress', { scaleX: 1, ease: 'none', scrollTrigger: { start: 0, end: 'max', scrub: .3 } });
+    var nav = $('.nav'), navHidden = false;
+    var showNav = gsap.quickTo(nav, 'yPercent', { duration: .45, ease: 'power3.out' });
+    ScrollTrigger.create({
+      start: 0, end: 'max',
+      onUpdate: function (self) {
+        var hide = self.direction === 1 && self.scroll() > 320;
+        if (hide !== navHidden) { navHidden = hide; showNav(hide ? -105 : 0); }
+      }
+    });
+
+    /* active section in nav */
+    $$('.nav ul a').forEach(function (a) {
+      var sec = $(a.getAttribute('href'));
+      if (!sec) return;
+      ScrollTrigger.create({ trigger: sec, start: 'top 45%', end: 'bottom 45%', toggleClass: { targets: a, className: 'active' } });
+    });
+
+    /* smooth anchor scrolling */
+    $$('a[href^="#"]').forEach(function (a) {
+      a.addEventListener('click', function (e) {
+        var id = a.getAttribute('href'), el = id.length > 1 ? $(id) : null;
+        if (id === '#top') el = document.body;
+        if (!el) return;
+        e.preventDefault();
+        gsap.to(window, { duration: 1.1, ease: 'power3.inOut', scrollTo: { y: el === document.body ? 0 : el, offsetY: 76, autoKill: true } });
+        if (history.replaceState) history.replaceState(null, '', id);
+      });
+    });
+
+    /* ---------- hero intro ---------- */
+    var h1 = $('.hero h1'), rot = $('#rot'), intro = gsap.timeline({ paused: true, defaults: { ease: 'power4.out' } });
+    var h1Split = SplitText.create(h1, { type: 'words', mask: 'words' });
+    intro
+      .from(nav, { yPercent: -100, autoAlpha: 0, duration: .8 }, 0)
+      .from('.hero .eyebrow', { y: 18, autoAlpha: 0, duration: .7 }, .15)
+      .from(h1Split.words, { yPercent: 115, rotate: 4, duration: 1.05, stagger: .045 }, .25)
+      .from('.hero .lede', { y: 24, autoAlpha: 0, duration: .9 }, '-=.75')
+      .from('.hero .btn', { y: 22, autoAlpha: 0, scale: .94, duration: .7, stagger: .1, ease: 'back.out(1.8)' }, '-=.6')
+      .from('.hero .avail', { y: 12, autoAlpha: 0, duration: .6 }, '-=.45')
+      .from('.index', { x: 40, autoAlpha: 0, duration: 1.1 }, .45)
+      .from('.index a', { x: 28, autoAlpha: 0, duration: .7, stagger: .09 }, .7)
+      .from('.facts .fact', { y: 26, autoAlpha: 0, duration: .8, stagger: .08 }, '-=.6')
+      .add(function () { h1Split.revert(); startRotator(); setupMagnets(); }, '+=.05');
+
+    /* count-up facts */
+    $$('.fact b').forEach(function (b, i) {
+      var m = b.textContent.match(/^([^\d]*)([\d.]+)(.*)$/);
+      if (!m) return;
+      var dec = (m[2].split('.')[1] || '').length, o = { v: 0 }, end = parseFloat(m[2]);
+      b.textContent = m[1] + (0).toFixed(dec) + m[3];
+      intro.to(o, { v: end, duration: 1.6, ease: 'power2.out', onUpdate: function () { b.textContent = m[1] + o.v.toFixed(dec) + m[3]; } }, 1.1 + i * .1);
+    });
+
+    var go = function () { ready(); intro.play(); };
+    var fontWait = (document.fonts && document.fonts.ready) ? document.fonts.ready : Promise.resolve();
+    Promise.race([fontWait, new Promise(function (r) { setTimeout(r, 900); })]).then(go);
+
+    /* rotating word: chars roll out, new word rolls in */
+    var rotTimer;
+    function startRotator() {
+      if (!rot) return;
+      var words = ['healthcare', 'telehealth', 'claims', 'field-safety'], wi = 0;
+      rot.style.whiteSpace = 'nowrap';
+      function swap() {
+        var out = SplitText.create(rot, { type: 'chars', mask: 'chars' });
+        gsap.to(out.chars, {
+          yPercent: -110, duration: .4, stagger: .02, ease: 'power2.in',
+          onComplete: function () {
+            out.revert(); wi = (wi + 1) % words.length; rot.textContent = words[wi];
+            var inn = SplitText.create(rot, { type: 'chars', mask: 'chars' });
+            gsap.from(inn.chars, { yPercent: 110, duration: .6, stagger: .03, ease: 'back.out(2)', onComplete: function () { inn.revert(); } });
+          }
+        });
+      }
+      rotTimer = setInterval(swap, 2800);
+    }
+
+    /* ---------- hero: cursor glow + scroll-away parallax ---------- */
+    var hero = $('.hero');
+    if (canHover) {
+      var gx = gsap.quickTo(hero, '--mx', { duration: .8, ease: 'power3' }), gy = gsap.quickTo(hero, '--my', { duration: .8, ease: 'power3' });
+      gsap.set(hero, { '--mx': 70, '--my': 40 });
+      hero.addEventListener('pointermove', function (e) {
+        var r = hero.getBoundingClientRect();
+        gx((e.clientX - r.left) / r.width * 100); gy((e.clientY - r.top) / r.height * 100);
+      });
+      hero.addEventListener('pointerenter', function () { hero.style.setProperty('--glow', 1); });
+      hero.addEventListener('pointerleave', function () { hero.style.setProperty('--glow', 0); });
+    }
+    gsap.fromTo('.hero > div', { yPercent: 0, opacity: 1 }, { yPercent: -12, opacity: .35, ease: 'none', immediateRender: false, scrollTrigger: { trigger: hero, start: 'top top', end: 'bottom top', scrub: true } });
+    gsap.to('.hero .index', { yPercent: -22, ease: 'none', scrollTrigger: { trigger: hero, start: 'top top', end: 'bottom top', scrub: true } });
+
+    /* ---------- section reveals ---------- */
+    $$('section.block').forEach(function (sec) {
+      var rail = $('.rail', sec), h2 = $('h2', sec), card = $('.case', sec);
+      if (rail) gsap.from(rail, { x: -24, autoAlpha: 0, duration: .8, scrollTrigger: { trigger: sec, start: 'top 82%', once: true } });
+      var h2Done = false;
+      if (h2) SplitText.create(h2, {
+        type: 'lines', mask: 'lines', autoSplit: true,
+        onSplit: function (self) {
+          if (h2Done) return;
+          return gsap.from(self.lines, { yPercent: 105, duration: 1, stagger: .1, ease: 'power4.out', scrollTrigger: { trigger: h2, start: 'top 86%', once: true }, onComplete: function () { h2Done = true; } });
+        }
+      });
+      if (card) {
+        var tl = gsap.timeline({ scrollTrigger: { trigger: card, start: 'top 85%', once: true } });
+        tl.from(card, { y: 70, autoAlpha: 0, scale: .97, duration: 1.1, ease: 'expo.out' })
+          .from($$('.tag, .sub', card), { y: 16, autoAlpha: 0, duration: .7, stagger: .08 }, '-=.8');
+        var scene = $('.scene, .scroll', card);
+        if (scene) tl.fromTo(scene, { clipPath: 'inset(0% 0% 100% 0% round 12px)' }, { clipPath: 'inset(0% 0% 0% 0% round 12px)', duration: 1.1, ease: 'expo.inOut', clearProps: 'clipPath' }, '-=.65');
+        var steps = $$('.steps li, .layers > *', card);
+        if (steps.length) tl.from(steps, { y: 10, autoAlpha: 0, duration: .45, stagger: .04 }, '-=.5');
+        var chips = $$('.chips li', card);
+        if (chips.length) tl.from(chips, { scale: .6, autoAlpha: 0, duration: .5, stagger: .045, ease: 'back.out(2.2)' }, '-=.35');
+        var note = $('.note', card);
+        if (note) tl.from(note, { autoAlpha: 0, duration: .6 }, '-=.4');
+
+        /* subtle 3D tilt on the showcase cards */
+        if (canHover) {
+          gsap.set(card, { transformPerspective: 1100 });
+          var rx = gsap.quickTo(card, 'rotationX', { duration: .6, ease: 'power3' }), ry = gsap.quickTo(card, 'rotationY', { duration: .6, ease: 'power3' });
+          card.addEventListener('pointermove', function (e) {
+            var r = card.getBoundingClientRect();
+            ry(((e.clientX - r.left) / r.width - .5) * 3); rx(-((e.clientY - r.top) / r.height - .5) * 3);
+          });
+          card.addEventListener('pointerleave', function () { rx(0); ry(0); });
+        }
+      }
+    });
+
+    /* experience: timeline line draws with scroll, jobs and bullets cascade */
+    var xp = $('.xp');
+    if (xp) {
+      gsap.to('.xp-fill', { scaleY: 1, ease: 'none', scrollTrigger: { trigger: xp, start: 'top 70%', end: 'bottom 60%', scrub: .6 } });
+      $$('.xp .job').forEach(function (job) {
+        gsap.timeline({ scrollTrigger: { trigger: job, start: 'top 82%', once: true } })
+          .from(job, { x: 30, autoAlpha: 0, duration: .9 })
+          .from($$('li', job), { y: 14, autoAlpha: 0, duration: .55, stagger: .07 }, '-=.55');
+      });
+    }
+
+    /* stack grid */
+    ScrollTrigger.batch('.skills > div', {
+      start: 'top 88%', once: true,
+      onEnter: function (els) {
+        gsap.from(els, { y: 30, autoAlpha: 0, duration: .8, stagger: .1 });
+        gsap.to(els, { '--sx': 1, duration: 1, stagger: .1, ease: 'power2.inOut', delay: .15 });
+      }
+    });
+
+    /* contact: panel unfolds as it scrolls in, rows cascade */
+    var contact = $('.contact');
+    if (contact) {
+      gsap.fromTo(contact, { clipPath: 'inset(10% 6% 10% 6% round 32px)' }, { clipPath: 'inset(0% 0% 0% 0% round 16px)', ease: 'none', scrollTrigger: { trigger: contact, start: 'top 95%', end: 'top 45%', scrub: .5 } });
+      gsap.timeline({ scrollTrigger: { trigger: contact, start: 'top 75%', once: true } })
+        .from($$('h2, p', contact), { y: 24, autoAlpha: 0, duration: .8, stagger: .1 })
+        .from($$('.row', contact), { x: 24, autoAlpha: 0, duration: .6, stagger: .08 }, '-=.6');
+    }
+    gsap.from('footer > *', { y: 12, autoAlpha: 0, duration: .7, stagger: .1, scrollTrigger: { trigger: 'footer', start: 'top 98%', once: true } });
+
+    /* magnetic buttons (desktop pointers only) */
+    function setupMagnets() {
+      if (!canHover) return;
+      $$('.btn, .copy').forEach(function (btn) {
+        var mx = gsap.quickTo(btn, 'x', { duration: .5, ease: 'elastic.out(1, .4)' }), my = gsap.quickTo(btn, 'y', { duration: .5, ease: 'elastic.out(1, .4)' });
+        btn.addEventListener('pointermove', function (e) {
+          var r = btn.getBoundingClientRect();
+          mx((e.clientX - r.left - r.width / 2) * .3); my((e.clientY - r.top - r.height / 2) * .4);
+        });
+        btn.addEventListener('pointerleave', function () { mx(0); my(0); });
+      });
+      $$('.copy').forEach(function (btn) {
+        btn.addEventListener('click', function () { gsap.fromTo(btn, { scale: .86 }, { scale: 1, duration: .6, ease: 'elastic.out(1.2, .4)' }); });
+      });
+    }
+
+    window.addEventListener('load', function () { ScrollTrigger.refresh(); });
+    return function () { clearInterval(rotTimer); root.style.scrollBehavior = ''; };
+  });
 })();
 </script>
 </body>
