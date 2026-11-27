@@ -9,6 +9,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Source+Sans+3:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap">
 <script>document.documentElement.classList.add('anim');setTimeout(function(){document.documentElement.classList.remove('anim')},3000);</script>
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"}}</script>
 <style>
 /* Layout: a clinical chart. Left rail of labels, content right. Each showcase is a live canvas scene. */
 :root{color-scheme:light;--bg:#F4F8F8;--surface:#FFFFFF;--ink:#0B1F2A;--ink-soft:#4B5F6B;--line:#D4E0E2;--teal:#0B7A87;--teal-ink:#064E57;--signal:#D9480F;--wash:#E3F0F1;--on-teal:#FFFFFF;--display:'Bricolage Grotesque','Segoe UI',system-ui,sans-serif;--body:'Source Sans 3','Segoe UI',system-ui,sans-serif;--mono:'JetBrains Mono',ui-monospace,'SFMono-Regular',Menlo,monospace;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
@@ -185,6 +186,41 @@ html.gsap h1,html.gsap h2{text-wrap:wrap}
 @media (prefers-reduced-motion:no-preference){html.anim .hero,html.anim .facts{visibility:hidden}}
 @media (prefers-reduced-motion:reduce){.nav ul a::after,.index a b,.index a .n{transition:none}}
 
+/* ---------- the 3D story ---------- */
+html{overflow-x:clip}
+.story{position:relative;width:100vw;height:100vh;height:100svh;margin:64px 0 0 calc(50% - 50vw);overflow:hidden;background:var(--bg)}
+.story canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+.story-ui{position:absolute;inset:0;pointer-events:none;font-family:var(--body)}
+.story-head{position:absolute;left:max(24px,calc(50vw - 530px));top:88px;display:grid;gap:6px}
+.story-kicker{font-family:var(--mono);font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;color:var(--signal)}
+.story-title{font-family:var(--display);font-weight:800;font-size:clamp(1.4rem,2.6vw,2rem);line-height:1.1;color:var(--ink);max-width:16ch}
+.story-caps{position:absolute;left:max(24px,calc(50vw - 530px));bottom:56px;width:min(380px,calc(100vw - 48px))}
+.story-cap{position:absolute;left:0;bottom:0;width:100%;background:color-mix(in srgb,var(--surface) 86%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid var(--line);border-radius:14px;padding:16px 18px;opacity:0;transform:translateY(14px);transition:opacity .45s ease,transform .45s cubic-bezier(.2,.8,.2,1)}
+.story-cap.on{opacity:1;transform:none}
+.story-cap span{display:block;font-family:var(--mono);font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;color:var(--teal-ink);margin-bottom:6px}
+.story-cap b{display:block;font-family:var(--display);font-weight:700;font-size:1.15rem;line-height:1.2;color:var(--ink);margin-bottom:4px}
+.story-cap p{font-size:.95rem;line-height:1.45;color:var(--ink-soft)}
+.story-dots{position:absolute;right:max(20px,calc(50vw - 530px));top:50%;transform:translateY(-50%);display:grid;gap:10px}
+.story-dots i{width:9px;height:9px;border-radius:50%;border:2px solid var(--teal);transition:background .3s ease,transform .3s ease}
+.story-dots i.on{background:var(--teal);transform:scale(1.15)}
+.story-bar{position:absolute;left:0;right:0;bottom:0;height:3px;background:var(--line)}
+.story-bar i{position:absolute;inset:0;background:linear-gradient(90deg,var(--teal),var(--signal));transform:scaleX(0);transform-origin:0 50%}
+.story-tag{position:absolute;left:0;top:0;opacity:0;white-space:nowrap;font-family:var(--mono);font-size:.7rem;letter-spacing:.05em;color:#fff;background:var(--ink);padding:5px 10px;border-radius:999px;transition:opacity .25s ease;will-change:transform}
+:root[data-theme="dark"] .story-tag{background:var(--teal);color:var(--on-teal)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .story-tag{background:var(--teal);color:var(--on-teal)}}
+.story-tag.knee{background:var(--signal);color:#fff;font-size:.8rem}
+.story-tag.knee b{font-family:var(--display);font-weight:800}
+.story-note{position:absolute;right:max(20px,calc(50vw - 530px));bottom:16px;font-family:var(--mono);font-size:.66rem;letter-spacing:.04em;color:var(--ink-soft)}
+.story:not(.ready) .story-ui{opacity:0}
+.story.no3d{display:none}
+@media (max-width:760px){
+  .story-head{top:150px;left:16px}
+  .story-caps{left:16px;bottom:44px;width:calc(100vw - 32px)}
+  .story-dots{right:12px}
+  .story-cap p{font-size:.88rem}
+  .story-note{left:16px;right:auto}
+}
+
 @media (max-width:920px){
   .hero{grid-template-columns:minmax(0,1fr)}
   section.block{grid-template-columns:minmax(0,1fr);gap:8px}
@@ -210,6 +246,7 @@ html.gsap h1,html.gsap h2{text-wrap:wrap}
   <a class="brand" href="#top">Jaspreet Singh</a>
   <nav aria-label="Sections">
     <ul>
+      <li><a href="#story">Story</a></li>
       <li><a href="#rcm">RCM</a></li>
       <li><a href="#rpm">RPM</a></li>
       <li><a href="#holistic">Holistic</a></li>
@@ -247,6 +284,29 @@ html.gsap h1,html.gsap h2{text-wrap:wrap}
   <div class="fact"><b>~40%</b><span>load-time cut on a production app</span></div>
   <div class="fact"><b>70%</b><span>cut in API latency by optimizing Node.js services</span></div>
 </div>
+
+<!-- THE STORY: scroll-driven 3D scene -->
+<section class="story" id="story" aria-label="Animated story: a claim and a knee, start to finish">
+  <canvas id="storyCanvas" aria-hidden="true"></canvas>
+  <div class="story-ui">
+    <div class="story-head"><span class="story-kicker">The story &middot; scroll to play</span><span class="story-title">One claim. One knee. Start to finish.</span></div>
+    <div class="story-caps">
+      <div class="story-cap" data-from="0" data-to=".25"><span>01 &middot; Check-in</span><b>Maya arrives at the front desk.</b><p>Raj scans her insurance card, and eligibility comes back in seconds.</p></div>
+      <div class="story-cap" data-from=".25" data-to=".46"><span>02 &middot; Coding &amp; scrubbing</span><b>The visit becomes a clean claim.</b><p>ICD-10 and CPT codes are applied, then Scrub-bot checks every field before it can cost money.</p></div>
+      <div class="story-cap" data-from=".46" data-to=".61"><span>03 &middot; Adjudication &amp; payment</span><b>It flies to the payer as an EDI 837.</b><p>The payer approves it, the 835 comes back, and the payment is posted.</p></div>
+      <div class="story-cap" data-from=".61" data-to=".83"><span>04 &middot; Computer vision at home</span><b>A phone camera becomes the clinic.</b><p>Pose landmarks are tracked on every frame, and the knee angle is computed live on each rep.</p></div>
+      <div class="story-cap" data-from=".83" data-to="1"><span>05 &middot; Clinician dashboard</span><b>Every rep reaches Dr. Lee.</b><p>Results stream to the physiotherapist&rsquo;s dashboard, so progress is tracked between visits.</p></div>
+    </div>
+    <div class="story-dots" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+    <div class="story-bar" aria-hidden="true"><i></i></div>
+    <span class="story-tag" data-tag="maya">Maya &middot; patient</span>
+    <span class="story-tag" data-tag="raj">Raj &middot; front desk</span>
+    <span class="story-tag" data-tag="bot">Scrub-bot &middot; claim scrubber</span>
+    <span class="story-tag" data-tag="lee">Dr. Lee &middot; physiotherapist</span>
+    <span class="story-tag knee" data-tag="knee">Knee <b>90&deg;</b></span>
+    <p class="story-note">Illustrative story. People, codes and amounts are simulated.</p>
+  </div>
+</section>
 
 <!-- 01 RCM -->
 <section class="block" id="rcm">
@@ -1032,6 +1092,7 @@ html.gsap h1,html.gsap h2{text-wrap:wrap}
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollToPlugin.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js"></script>
+<script type="module" src="story.js"></script>
 <script>
 /* Motion layer: GSAP + ScrollTrigger + SplitText. Everything lives inside matchMedia so
    reduced-motion users get the static page, and all of it reverts cleanly. */
